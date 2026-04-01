@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anh Truong · 25832146 · MKT3039 E-Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=IM+Fell+English:ital@0;1&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment: #f5efe0;
+    --parchment-dark: #e8dfc8;
+    --ink: #2c2318;
+    --ink-muted: #6b5c45;
+    --tab-h: 36px;
+    --folder-radius: 10px;
+
+    /* Gryffindor */
+    --g-main: #7B0D1E;
+    --g-accent: #C8A951;
+    --g-bg: #f9f0e8;
+    --g-light: #F5E8D0;
+    --g-text: #3d0a0f;
+
+    /* Slytherin */
+    --s-main: #1A472A;
+    --s-accent: #A8A9AD;
+    --s-bg: #eaf2ec;
+    --s-light: #D4E8D8;
+    --s-text: #0d2415;
+
+    /* Ravenclaw */
+    --r-main: #0E1F57;
+    --r-accent: #946B2D;
+    --r-bg: #e8ecf5;
+    --r-light: #D0D8EE;
+    --r-text: #071030;
+
+    /* Hufflepuff */
+    --h-main: #F0C040;
+    --h-accent: #221F1F;
+    --h-bg: #fdf8e8;
+    --h-light: #FAF0C0;
+    --h-text: #1a1600;
+  }
+
+  body {
+    background: #d6caaf;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(0,0,0,0.03) 28px, rgba(0,0,0,0.03) 29px),
+      repeating-linear-gradient(90deg, transparent, transparent 28px, rgba(0,0,0,0.02) 28px, rgba(0,0,0,0.02) 29px);
+    min-height: 100vh;
+    font-family: 'Courier Prime', monospace;
+    color: var(--ink);
+    padding: 2.5rem 1.5rem 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    width: 100%;
+    max-width: 860px;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .header-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .site-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 4vw, 2.6rem);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+  }
+
+  .site-meta {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.75rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+  }
+
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: var(--ink-muted);
+    margin: 1rem auto;
+    opacity: 0.4;
+  }
+
+  /* ── FOLDER STACK ── */
+  .folder-stack {
+    width: 100%;
+    max-width: 860px;
+    position: relative;
+  }
+
+  /* ── TAB ROW ── */
+  .tab-row {
+    display: flex;
+    gap: 6px;
+    padding: 0 4px;
+    position: relative;
+    z-index: 10;
+    align-items: flex-end;
+  }
+
+  .tab {
+    position: relative;
+    height: var(--tab-h);
+    padding: 0 16px;
+    border-radius: 7px 7px 0 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: transform 0.15s ease, filter 0.15s ease;
+    user-select: none;
+    border: 1.5px solid rgba(0,0,0,0.15);
+    border-bottom: none;
+  }
+
+  .tab:hover { transform: translateY(-3px); filter: brightness(1.06); }
+  .tab.active { transform: translateY(2px); z-index: 5; filter: brightness(1.1); }
+
+  .tab-intro  { background: var(--parchment); color: var(--ink); }
+  .tab-gryff  { background: var(--g-main); color: var(--g-accent); }
+  .tab-slyth  { background: var(--s-main); color: var(--s-accent); }
+  .tab-raven  { background: var(--r-main); color: var(--r-accent); }
+  .tab-huffl  { background: var(--h-main); color: var(--h-accent); }
+  .tab-refs   { background: var(--parchment-dark); color: var(--ink); }
+
+  .tab-code {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.6rem;
+    opacity: 0.65;
+    font-weight: 400;
+  }
+
+  /* ── FOLDER BODY ── */
+  .folder-body {
+    background: var(--parchment);
+    border-radius: 0 var(--folder-radius) var(--folder-radius) var(--folder-radius);
+    border: 1.5px solid rgba(0,0,0,0.15);
+    position: relative;
+    overflow: hidden;
+    min-height: 340px;
+  }
+
+  /* linen texture overlay */
+  .folder-body::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.018) 3px, rgba(0,0,0,0.018) 4px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── PANELS ── */
+  .panel {
+    display: none;
+    padding: 2.5rem 2.8rem 3rem;
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .panel.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── PANEL THEMES ── */
+  .panel-intro, .panel-refs {
+    background: transparent;
+  }
+
+  .panel-gryff { background: linear-gradient(135deg, var(--g-bg) 0%, transparent 60%); }
+  .panel-slyth { background: linear-gradient(135deg, var(--s-bg) 0%, transparent 60%); }
+  .panel-raven { background: linear-gradient(135deg, var(--r-bg) 0%, transparent 60%); }
+  .panel-huffl { background: linear-gradient(135deg, var(--h-bg) 0%, transparent 60%); }
+
+  /* ── HOUSE BADGE ── */
+  .house-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 14px 5px 10px;
+    border-radius: 4px;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+
+  .badge-gryff { background: var(--g-main); color: var(--g-accent); }
+  .badge-slyth { background: var(--s-main); color: var(--s-accent); }
+  .badge-raven { background: var(--r-main); color: var(--r-accent); }
+  .badge-huffl { background: var(--h-main); color: var(--h-accent); }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .badge-gryff .badge-dot { background: var(--g-accent); }
+  .badge-slyth .badge-dot { background: var(--s-accent); }
+  .badge-raven .badge-dot { background: var(--r-accent); }
+  .badge-huffl .badge-dot { background: var(--h-accent); }
+
+  /* ── SECTION ACCENT BAR ── */
+  .accent-bar {
+    width: 40px;
+    height: 3px;
+    border-radius: 2px;
+    margin-bottom: 1.4rem;
+  }
+  .bar-gryff { background: var(--g-main); }
+  .bar-slyth { background: var(--s-main); }
+  .bar-raven { background: var(--r-main); }
+  .bar-huffl { background: var(--h-accent); }
+  .bar-ink   { background: var(--ink); }
+
+  /* ── TYPOGRAPHY ── */
+  .section-eyebrow {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    margin-bottom: 0.35rem;
+    color: var(--ink);
+  }
+
+  .section-title.gryff { color: var(--g-main); }
+  .section-title.slyth { color: var(--s-main); }
+  .section-title.raven { color: var(--r-main); }
+  .section-title.huffl { color: var(--h-accent); }
+
+  .section-subtitle {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    margin-bottom: 1.8rem;
+  }
+
+  .prose {
+    font-family: 'IM Fell English', serif;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--ink);
+    max-width: 68ch;
+  }
+
+  .prose p + p { margin-top: 1em; }
+
+  .prose strong {
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  /* ── PLACEHOLDER BLOCKS ── */
+  .placeholder {
+    border: 1.5px dashed rgba(0,0,0,0.18);
+    border-radius: 6px;
+    padding: 1.4rem 1.6rem;
+    margin: 1.2rem 0;
+    position: relative;
+    background: rgba(255,255,255,0.35);
+  }
+
+  .placeholder-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .placeholder-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .ph-line {
+    height: 10px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 3px;
+  }
+
+  .ph-line.short { width: 55%; }
+  .ph-line.med   { width: 80%; }
+  .ph-line.long  { width: 100%; }
+
+  /* ── INTRO PANEL ── */
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 600px) {
+    .intro-grid { grid-template-columns: 1fr; }
+  }
+
+  .info-card {
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 1.2rem 1.4rem;
+  }
+
+  .info-card-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .info-card-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+
+  /* ── SECTION NAV PILLS ── */
+  .section-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 2rem;
+  }
+
+  .nav-pill {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 1.5px solid;
+    transition: all 0.15s;
+    background: transparent;
+  }
+
+  .nav-pill:hover { transform: translateY(-1px); }
+
+  .pill-gryff { border-color: var(--g-main); color: var(--g-main); }
+  .pill-gryff:hover { background: var(--g-main); color: var(--g-accent); }
+
+  .pill-slyth { border-color: var(--s-main); color: var(--s-main); }
+  .pill-slyth:hover { background: var(--s-main); color: var(--s-accent); }
+
+  .pill-raven { border-color: var(--r-main); color: var(--r-main); }
+  .pill-raven:hover { background: var(--r-main); color: var(--r-accent); }
+
+  .pill-huffl { border-color: var(--h-accent); color: var(--h-text); }
+  .pill-huffl:hover { background: var(--h-main); color: var(--h-accent); }
+
+  /* ── CHECKLIST TABLE ── */
+  .checklist-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.78rem;
+    margin-top: 1rem;
+  }
+
+  .checklist-table th {
+    background: var(--h-accent);
+    color: var(--h-text);
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.65rem;
+  }
+
+  .checklist-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    color: var(--ink);
+    vertical-align: top;
+  }
+
+  .checklist-table tr:nth-child(even) td {
+    background: rgba(255,255,255,0.35);
+  }
+
+  .check-pass { color: #2d6a2d; font-weight: 700; }
+  .check-fail { color: #8b0000; font-weight: 700; }
+  .check-part { color: #7a5c00; font-weight: 700; }
+
+  /* ── REFERENCES ── */
+  .ref-list {
+    list-style: none;
+    margin-top: 1rem;
+  }
+
+  .ref-list li {
+    font-family: 'IM Fell English', serif;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding-left: 1.5rem;
+    text-indent: -1.5rem;
+    color: var(--ink);
+  }
+
+  .ref-list li:last-child { border-bottom: none; }
+
+  /* ── FOOTER ── */
+  .folder-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.6rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.12em;
+    opacity: 0.7;
+  }
+
+  /* ── WELCOME STATE (nothing selected) ── */
+  .welcome-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .welcome-icon {
+    font-size: 2.5rem;
+    opacity: 0.3;
+  }
+
+  .welcome-text {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--ink-muted);
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 700px) {
+    body { padding: 1.5rem 0.8rem 4rem; }
+    .tab { padding: 0 9px; font-size: 0.6rem; }
+    .tab-code { display: none; }
+    .panel { padding: 1.8rem 1.4rem 2.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <p class="header-label">MKT3039 · Digital Marketing · AS2</p>
+  <h1 class="site-title">Anh Truong</h1>
+  <p class="site-meta">Student ID: 25832146 &nbsp;·&nbsp; University of Northampton &nbsp;·&nbsp; BA (Hons) Marketing Management</p>
+  <div class="divider"></div>
+  <p class="site-meta" style="font-style:italic;opacity:0.7;">Select a folder to begin</p>
+</header>
+
+<!-- FOLDER STACK -->
+<div class="folder-stack">
+
+  <!-- TABS -->
+  <div class="tab-row" role="tablist">
+    <button class="tab tab-intro" role="tab" onclick="openTab('intro', this)" aria-selected="false">
+      <span class="tab-code">FILE_00//</span> Introduction
+    </button>
+    <button class="tab tab-gryff" role="tab" onclick="openTab('gryff', this)" aria-selected="false">
+      <span class="tab-code">FILE_01//</span> Ladder of Engagement
+    </button>
+    <button class="tab tab-slyth" role="tab" onclick="openTab('slyth', this)" aria-selected="false">
+      <span class="tab-code">FILE_02//</span> TikTok Evaluation
+    </button>
+    <button class="tab tab-raven" role="tab" onclick="openTab('raven', this)" aria-selected="false">
+      <span class="tab-code">FILE_03//</span> Trend Analysis
+    </button>
+    <button class="tab tab-huffl" role="tab" onclick="openTab('huffl', this)" aria-selected="false">
+      <span class="tab-code">FILE_04//</span> Website Checklist
+    </button>
+    <button class="tab tab-refs" role="tab" onclick="openTab('refs', this)" aria-selected="false">
+      <span class="tab-code">FILE_05//</span> References
+    </button>
+  </div>
+
+  <!-- FOLDER BODY -->
+  <div class="folder-body">
+
+    <!-- WELCOME (default state) -->
+    <div id="panel-welcome" class="panel active">
+      <div class="welcome-state">
+        <div class="welcome-icon">📂</div>
+        <p class="welcome-text">Select a folder tab above to open a section.</p>
+      </div>
+    </div>
+
+    <!-- INTRO -->
+    <div id="panel-intro" class="panel panel-intro">
+      <p class="section-eyebrow">FILE_00 · Introduction</p>
+      <h2 class="section-title">Welcome to my E-Portfolio</h2>
+      <p class="section-subtitle">Digital Marketing · MKT3039 · Assessment 2</p>
+      <div class="accent-bar bar-ink"></div>
+
+      <div class="prose">
+        <p>This e-portfolio presents my understanding and critical analysis of key digital marketing concepts explored throughout MKT3039. Each section corresponds to a portfolio entry examining theory alongside real-world brand application.</p>
+        <p>The portfolio is structured across four thematic entries — the Ladder of Engagement, a social media platform evaluation, trend analysis, and a website checklist — alongside this introduction and a full reference list.</p>
+        <p>[Replace this placeholder with your personal introduction, academic context, and brief outline of your chosen brands/platforms across the four entries. Aim for approximately 150–200 words.]</p>
+      </div>
+
+      <div class="intro-grid">
+        <div class="info-card">
+          <p class="info-card-label">Student</p>
+          <p class="info-card-value">Anh Truong · 25832146</p>
+        </div>
+        <div class="info-card">
+          <p class="info-card-label">Module</p>
+          <p class="info-card-value">MKT3039 · Digital Marketing</p>
+        </div>
+        <div class="info-card">
+          <p class="info-card-label">Programme</p>
+          <p class="info-card-value">BA (Hons) Marketing Management</p>
+        </div>
+        <div class="info-card">
+          <p class="info-card-label">Partner Institution</p>
+          <p class="info-card-value">Foreign Trade University, Hanoi</p>
+        </div>
+      </div>
+
+      <div style="margin-top:2rem;">
+        <p class="section-eyebrow" style="margin-bottom:0.8rem;">Navigate to a section</p>
+        <div class="section-nav">
+          <button class="nav-pill pill-gryff" onclick="openTabByKey('gryff')">Ladder of Engagement</button>
+          <button class="nav-pill pill-slyth" onclick="openTabByKey('slyth')">TikTok Evaluation</button>
+          <button class="nav-pill pill-raven" onclick="openTabByKey('raven')">Trend Analysis</button>
+          <button class="nav-pill pill-huffl" onclick="openTabByKey('huffl')">Website Checklist</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRYFFINDOR: LADDER OF ENGAGEMENT -->
+    <div id="panel-gryff" class="panel panel-gryff">
+      <div class="house-badge badge-gryff"><span class="badge-dot"></span>Gryffindor · FILE_01</div>
+      <p class="section-eyebrow">Portfolio Entry 1</p>
+      <h2 class="section-title gryff">The Ladder of Engagement</h2>
+      <p class="section-subtitle">Theory, application &amp; brand analysis</p>
+      <div class="accent-bar bar-gryff"></div>
+
+      <div class="prose">
+        <p><strong>Understanding the Ladder of Engagement</strong></p>
+        <p>The Ladder of Engagement is a framework that describes the progressive depth of consumer involvement with a brand's digital content — from passive consumption through to active advocacy. Rooted in Godin's (1999) permission marketing philosophy, the model recognises that sustainable brand relationships are built incrementally rather than through interruptive mass communication.</p>
+        <p>[Expand with your academic definition, key theorists (Godin 1999; SEER framework), and explanation of the rungs — lurker, casual, active, committed, advocate. ~250 words.]</p>
+      </div>
+
+      <div class="placeholder">
+        <p class="placeholder-label">→ Brand example: identify your chosen company</p>
+        <div class="placeholder-lines">
+          <div class="ph-line long"></div>
+          <div class="ph-line med"></div>
+          <div class="ph-line long"></div>
+          <div class="ph-line short"></div>
+        </div>
+      </div>
+
+      <div class="prose" style="margin-top:1.4rem;">
+        <p><strong>Applying the ladder</strong></p>
+        <p>[Describe the specific elements of your chosen brand's engagement strategy, mapping each identified tactic to the corresponding rung. ~200 words.]</p>
+      </div>
+
+      <div class="placeholder" style="margin-top:1rem;">
+        <p class="placeholder-label">→ Diagram / visual — ladder illustration or brand mapping</p>
+        <div style="height:80px; background:rgba(123,13,30,0.06); border-radius:4px; display:flex; align-items:center; justify-content:center;">
+          <span style="font-family:'Courier Prime',monospace;font-size:0.65rem;color:var(--ink-muted);letter-spacing:0.1em;">INSERT DIAGRAM OR SCREENSHOT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLYTHERIN: TIKTOK EVALUATION -->
+    <div id="panel-slyth" class="panel panel-slyth">
+      <div class="house-badge badge-slyth"><span class="badge-dot"></span>Slytherin · FILE_02</div>
+      <p class="section-eyebrow">Portfolio Entry 2</p>
+      <h2 class="section-title slyth">TikTok — Social Media Evaluation</h2>
+      <p class="section-subtitle">Platform critique using academic framework</p>
+      <div class="accent-bar bar-slyth"></div>
+
+      <div class="prose">
+        <p><strong>How marketers use TikTok</strong></p>
+        <p>TikTok has emerged as a dominant short-form video platform with over one billion monthly active users globally. For marketers, the platform offers access to highly engaged audiences through native content formats including in-feed video, branded hashtag challenges, and TikTok LIVE. Its algorithm-driven discovery mechanism enables organic reach at a scale that most platforms no longer permit without paid amplification.</p>
+        <p>[Expand with specific marketer behaviours, advertising formats, influencer marketing integration. ~150 words.]</p>
+      </div>
+
+      <div class="placeholder">
+        <p class="placeholder-label">→ Framework critique — e.g. Smith's SOSTAC, PESO, or Felix et al. (2017)</p>
+        <div class="placeholder-lines">
+          <div class="ph-line long"></div>
+          <div class="ph-line med"></div>
+          <div class="ph-line long"></div>
+          <div class="ph-line long"></div>
+          <div class="ph-line short"></div>
+        </div>
+      </div>
+
+      <div class="prose" style="margin-top:1.4rem;">
+        <p><strong>Critical evaluation</strong></p>
+        <p>[Apply your chosen textbook framework to critique TikTok as a marketing channel — strengths, limitations, suitability by brand type. ~200 words.]</p>
+      </div>
+
+      <div class="placeholder">
+        <p class="placeholder-label">→ Screenshot or visual evidence of TikTok marketing activity</p>
+        <div style="height:80px; background:rgba(26,71,42,0.06); border-radius:4px; display:flex; align-items:center; justify-content:center;">
+          <span style="font-family:'Courier Prime',monospace;font-size:0.65rem;color:var(--ink-muted);letter-spacing:0.1em;">INSERT SCREENSHOT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RAVENCLAW: TREND ANALYSIS -->
+    <div id="panel-raven" class="panel panel-raven">
+      <div class="house-badge badge-raven"><span class="badge-dot"></span>Ravenclaw · FILE_03</div>
+      <p class="section-eyebrow">Portfolio Entry 3</p>
+      <h2 class="section-title raven">Trend Analysis</h2>
+      <p class="section-subtitle">Evaluating a digital trend from a marketer's perspective</p>
+      <div class="accent-bar bar-raven"></div>
+
+      <div class="prose">
+        <p><strong>Selected trend: [Your chosen trend]</strong></p>
+        <p>[Name and describe the digital trend — e.g. AI-generated content, social commerce, the creator economy, immersive AR marketing. Identify your source (class discussion, industry report, academic text). ~100 words.]</p>
+      </div>
+
+      <div class="placeholder">
+        <p class="placeholder-label">→ Trend evaluation — marketer's perspective</p>
+        <div class="placeholder-lines">
+          <div class="ph-line long"></div>
+          <div class="ph-line med"></div>
+          <div class="ph-line long"></div>
+          <div class="ph-line long"></div>
+          <div class="ph-line med"></div>
+          <div class="ph-line short"></div>
+        </div>
+      </div>
+
+      <div class="prose" style="margin-top:1.4rem;">
+        <p><strong>Brand opportunities</strong></p>
+        <p>[Evaluate how brands can take advantage of this trend — which sectors, brand types, or campaign objectives are best served? What are the risks or barriers? ~200 words.]</p>
+      </div>
+
+      <div class="placeholder">
+        <p class="placeholder-label">→ Relevant image, graph, or industry data visual</p>
+        <div style="height:80px; background:rgba(14,31,87,0.06); border-radius:4px; display:flex; align-items:center; justify-content:center;">
+          <span style="font-family:'Courier Prime',monospace;font-size:0.65rem;color:var(--ink-muted);letter-spacing:0.1em;">INSERT VISUAL OR DATA</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HUFFLEPUFF: WEBSITE CHECKLIST -->
+    <div id="panel-huffl" class="panel panel-huffl">
+      <div class="house-badge badge-huffl"><span class="badge-dot"></span>Hufflepuff · FILE_04</div>
+      <p class="section-eyebrow">Portfolio Entry 4</p>
+      <h2 class="section-title huffl">Website Checklist</h2>
+      <p class="section-subtitle">Criteria framework &amp; applied evaluation</p>
+      <div class="accent-bar bar-huffl"></div>
+
+      <div class="prose">
+        <p><strong>Developing the checklist</strong></p>
+        <p>[Explain your rationale for the checklist criteria — reference academic sources such as Chaffey &amp; Ellis-Chadwick or Nielsen's usability heuristics. Note whether you have differentiated criteria for different website types (e-commerce, informational, service). ~100 words.]</p>
+      </div>
+
+      <table class="checklist-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Criterion</th>
+            <th>Category</th>
+            <th>Weight</th>
+            <th>Score</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Clear value proposition above the fold</td>
+            <td>UX / Content</td>
+            <td>High</td>
+            <td class="check-pass">[Pass]</td>
+            <td>[Note]</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Mobile responsiveness</td>
+            <td>Technical</td>
+            <td>High</td>
+            <td class="check-pass">[Pass]</td>
+            <td>[Note]</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Page load speed (&lt; 3s)</td>
+            <td>Technical</td>
+            <td>High</td>
+            <td class="check-part">[Partial]</td>
+            <td>[Note]</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Clear navigation structure</td>
+            <td>UX</td>
+            <td>High</td>
+            <td class="check-pass">[Pass]</td>
+            <td>[Note]</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>SEO: meta titles &amp; descriptions present</td>
+            <td>SEO</td>
+            <td>Med</td>
+            <td class="check-fail">[Fail]</td>
+            <td>[Note]</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Accessible colour contrast (WCAG AA)</td>
+            <td>Accessibility</td>
+            <td>Med</td>
+            <td class="check-part">[Partial]</td>
+            <td>[Note]</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>CTA buttons — visible &amp; action-oriented</td>
+            <td>Conversion</td>
+            <td>High</td>
+            <td class="check-pass">[Pass]</td>
+            <td>[Note]</td>
+          </tr>
+          <tr>
+            <td>8</td>
+            <td>SSL / HTTPS security</td>
+            <td>Technical</td>
+            <td>High</td>
+            <td class="check-pass">[Pass]</td>
+            <td>[Note]</td>
+          </tr>
+          <tr>
+            <td>9</td>
+            <td>Social proof (reviews, logos, case studies)</td>
+            <td>Trust</td>
+            <td>Med</td>
+            <td class="check-pass">[Pass]</td>
+            <td>[Note]</td>
+          </tr>
+          <tr>
+            <td>10</td>
+            <td>Privacy policy &amp; cookie notice</td>
+            <td>Legal / Trust</td>
+            <td>High</td>
+            <td class="check-fail">[Fail]</td>
+            <td>[Note]</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="prose" style="margin-top:1.6rem;">
+        <p><strong>Applied evaluation: [Your chosen website]</strong></p>
+        <p>[Discuss the results of applying the checklist — what does the site do well, where does it fall short, and what are the implications for the brand's digital marketing effectiveness? ~200 words.]</p>
+      </div>
+    </div>
+
+    <!-- REFERENCES -->
+    <div id="panel-refs" class="panel panel-refs">
+      <p class="section-eyebrow">FILE_05 · References</p>
+      <h2 class="section-title">Reference List</h2>
+      <p class="section-subtitle">Harvard referencing throughout</p>
+      <div class="accent-bar bar-ink"></div>
+
+      <ul class="ref-list">
+        <li>Chaffey, D. and Ellis-Chadwick, F. (2022) <em>Digital marketing: strategy, implementation and practice.</em> 8th edn. Harlow: Pearson Education.</li>
+        <li>Felix, R., Rauschnabel, P.A. and Hinsch, C. (2017) 'Elements of strategic social media marketing: a holistic framework', <em>Journal of Business Research,</em> 70, pp. 118–126.</li>
+        <li>Godin, S. (1999) <em>Permission marketing: turning strangers into friends and friends into customers.</em> New York: Simon &amp; Schuster.</li>
+        <li>[Add all additional sources cited across your four portfolio entries in Harvard format. Abstracts, bibliographies, reference lists, and appendices are excluded from the 2,000-word count.]</li>
+        <li>[Further reference]</li>
+        <li>[Further reference]</li>
+        <li>[Further reference]</li>
+      </ul>
+    </div>
+
+  </div><!-- /folder-body -->
+</div><!-- /folder-stack -->
+
+<p class="folder-footer">Anh Truong · 25832146 · MKT3039 AS2 · University of Northampton × Foreign Trade University</p>
+
+<script>
+  const panels = ['welcome','intro','gryff','slyth','raven','huffl','refs'];
+  const tabs = document.querySelectorAll('.tab');
+
+  function openTab(key, btn) {
+    panels.forEach(id => {
+      const el = document.getElementById('panel-' + id);
+      if (el) el.classList.remove('active');
+    });
+    tabs.forEach(t => t.classList.remove('active'));
+
+    const target = document.getElementById('panel-' + key);
+    if (target) target.classList.add('active');
+    if (btn) btn.classList.add('active');
+  }
+
+  function openTabByKey(key) {
+    const tabMap = {
+      intro: 0, gryff: 1, slyth: 2, raven: 3, huffl: 4, refs: 5
+    };
+    const idx = tabMap[key];
+    if (idx !== undefined) openTab(key, tabs[idx]);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
