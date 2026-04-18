@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hoang Tu Anh Truong · 25832146 · MKT3039 E-Portfolio</title>
+<title>Anh Truong · 25832146 · MKT3039 E-Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=IM+Fell+English:ital@0;1&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -332,8 +332,8 @@
   }
 
   .checklist-table th {
-    background: var(--h-accent);
-    color: var(--h-main);
+    background: var(--r-main);
+    color: var(--r-accent);
     padding: 8px 12px;
     text-align: left;
     font-weight: 700;
@@ -436,9 +436,9 @@
 <body>
 
 <header class="site-header">
-  <p class="header-label">25/26 · MKT3039-PFT-P2 · Digital Marketing · AS2</p>
+  <p class="header-label">MKT3039 · Digital Marketing · AS2</p>
   <h1 class="site-title">Anh Truong</h1>
-  <p class="site-meta">Student ID: 25832146 &nbsp;·&nbsp; University of Northampton &nbsp;·&nbsp; Foreign Trade University &nbsp;·&nbsp; BA (Hons) Marketing Management</p>
+  <p class="site-meta">Student ID: 25832146 &nbsp;·&nbsp; University of Northampton &nbsp;·&nbsp; BA (Hons) Marketing Management</p>
   <div class="divider"></div>
   <p class="site-meta" style="font-style:italic;opacity:0.7;">Select a folder to begin</p>
 </header>
@@ -455,17 +455,17 @@
       <span class="tab-code">FILE_01//</span>
       <span class="tab-label">Ladder of Engagement</span>
     </button>
-    <button class="tab tab-slyth" role="tab" onclick="openTab('slyth',this)">
+    <button class="tab tab-huffl" role="tab" onclick="openTab('tiktok',this)">
       <span class="tab-code">FILE_02//</span>
       <span class="tab-label">TikTok Evaluation</span>
     </button>
-    <button class="tab tab-raven" role="tab" onclick="openTab('raven',this)">
+    <button class="tab tab-raven" role="tab" onclick="openTab('checklist',this)">
       <span class="tab-code">FILE_03//</span>
-      <span class="tab-label">Trend Analysis</span>
-    </button>
-    <button class="tab tab-huffl" role="tab" onclick="openTab('huffl',this)">
-      <span class="tab-code">FILE_04//</span>
       <span class="tab-label">Website Checklist</span>
+    </button>
+    <button class="tab tab-slyth" role="tab" onclick="openTab('trend',this)">
+      <span class="tab-code">FILE_04//</span>
+      <span class="tab-label">Trend Analysis</span>
     </button>
     <button class="tab tab-refs" role="tab" onclick="openTab('refs',this)">
       <span class="tab-code">FILE_05//</span>
@@ -520,9 +520,9 @@
         <p class="section-eyebrow" style="margin-bottom:0.8rem;">Navigate to a section</p>
         <div class="section-nav">
           <button class="nav-pill pill-gryff" onclick="openTabByIndex(1)">Ladder of Engagement</button>
-          <button class="nav-pill pill-slyth" onclick="openTabByIndex(2)">TikTok Evaluation</button>
-          <button class="nav-pill pill-raven" onclick="openTabByIndex(3)">Trend Analysis</button>
-          <button class="nav-pill pill-huffl" onclick="openTabByIndex(4)">Website Checklist</button>
+          <button class="nav-pill pill-huffl" onclick="openTabByIndex(2)">TikTok Evaluation</button>
+          <button class="nav-pill pill-raven" onclick="openTabByIndex(3)">Website Checklist</button>
+          <button class="nav-pill pill-slyth" onclick="openTabByIndex(4)">Trend Analysis</button>
         </div>
       </div>
     </div>
@@ -562,13 +562,13 @@
       </div>
     </div>
 
-    <!-- SLYTHERIN: TIKTOK EVALUATION -->
-    <div id="panel-slyth" class="panel panel-slyth">
-      <div class="house-badge badge-slyth"><span class="badge-dot"></span>Slytherin · FILE_02</div>
+    <!-- HUFFLEPUFF: TIKTOK EVALUATION -->
+    <div id="panel-tiktok" class="panel panel-huffl">
+      <div class="house-badge badge-huffl"><span class="badge-dot"></span>Hufflepuff · FILE_02</div>
       <p class="section-eyebrow">Portfolio Entry 2</p>
-      <h2 class="section-title slyth">TikTok — Social Media Evaluation</h2>
+      <h2 class="section-title huffl">TikTok — Social Media Evaluation</h2>
       <p class="section-subtitle">Platform critique using academic framework</p>
-      <div class="accent-bar bar-slyth"></div>
+      <div class="accent-bar bar-huffl"></div>
 
       <div class="prose">
         <p><strong>How marketers use TikTok</strong></p>
@@ -591,54 +591,19 @@
 
       <div class="placeholder">
         <p class="placeholder-label">→ Screenshot or visual evidence of TikTok marketing activity</p>
-        <div style="height:80px;background:rgba(26,71,42,0.06);border-radius:4px;display:flex;align-items:center;justify-content:center;">
+        <div style="height:80px;background:rgba(240,192,64,0.08);border-radius:4px;display:flex;align-items:center;justify-content:center;">
           <span style="font-size:0.62rem;color:var(--ink-muted);letter-spacing:0.1em;">INSERT SCREENSHOT</span>
         </div>
       </div>
     </div>
 
-    <!-- RAVENCLAW: TREND ANALYSIS -->
-    <div id="panel-raven" class="panel panel-raven">
+    <!-- RAVENCLAW: WEBSITE CHECKLIST -->
+    <div id="panel-checklist" class="panel panel-raven">
       <div class="house-badge badge-raven"><span class="badge-dot"></span>Ravenclaw · FILE_03</div>
       <p class="section-eyebrow">Portfolio Entry 3</p>
-      <h2 class="section-title raven">Trend Analysis</h2>
-      <p class="section-subtitle">Evaluating a digital trend from a marketer's perspective</p>
-      <div class="accent-bar bar-raven"></div>
-
-      <div class="prose">
-        <p><strong>Selected trend: [Your chosen trend]</strong></p>
-        <p>[Name and describe the digital trend — e.g. AI-generated content, social commerce, the creator economy, immersive AR marketing. Identify your source. ~100 words.]</p>
-      </div>
-
-      <div class="placeholder">
-        <p class="placeholder-label">→ Trend evaluation — marketer's perspective</p>
-        <div class="placeholder-lines">
-          <div class="ph-line long"></div><div class="ph-line med"></div>
-          <div class="ph-line long"></div><div class="ph-line long"></div>
-          <div class="ph-line med"></div><div class="ph-line short"></div>
-        </div>
-      </div>
-
-      <div class="prose" style="margin-top:1.4rem;">
-        <p><strong>Brand opportunities</strong></p>
-        <p>[Evaluate how brands can take advantage of this trend — which sectors, brand types, or campaign objectives are best served? What are the risks or barriers? ~200 words.]</p>
-      </div>
-
-      <div class="placeholder">
-        <p class="placeholder-label">→ Relevant image, graph, or industry data visual</p>
-        <div style="height:80px;background:rgba(14,31,87,0.06);border-radius:4px;display:flex;align-items:center;justify-content:center;">
-          <span style="font-size:0.62rem;color:var(--ink-muted);letter-spacing:0.1em;">INSERT VISUAL OR DATA</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- HUFFLEPUFF: WEBSITE CHECKLIST -->
-    <div id="panel-huffl" class="panel panel-huffl">
-      <div class="house-badge badge-huffl"><span class="badge-dot"></span>Hufflepuff · FILE_04</div>
-      <p class="section-eyebrow">Portfolio Entry 4</p>
-      <h2 class="section-title huffl">Website Checklist</h2>
+      <h2 class="section-title raven">Website Checklist</h2>
       <p class="section-subtitle">Criteria framework &amp; applied evaluation</p>
-      <div class="accent-bar bar-huffl"></div>
+      <div class="accent-bar bar-raven"></div>
 
       <div class="prose">
         <p><strong>Developing the checklist</strong></p>
@@ -669,6 +634,41 @@
       </div>
     </div>
 
+    <!-- SLYTHERIN: TREND ANALYSIS -->
+    <div id="panel-trend" class="panel panel-slyth">
+      <div class="house-badge badge-slyth"><span class="badge-dot"></span>Slytherin · FILE_04</div>
+      <p class="section-eyebrow">Portfolio Entry 4</p>
+      <h2 class="section-title slyth">Trend Analysis</h2>
+      <p class="section-subtitle">Evaluating a digital trend from a marketer's perspective</p>
+      <div class="accent-bar bar-slyth"></div>
+
+      <div class="prose">
+        <p><strong>Selected trend: [Your chosen trend]</strong></p>
+        <p>[Name and describe the digital trend — e.g. AI-generated content, social commerce, the creator economy, immersive AR marketing. Identify your source. ~100 words.]</p>
+      </div>
+
+      <div class="placeholder">
+        <p class="placeholder-label">→ Trend evaluation — marketer's perspective</p>
+        <div class="placeholder-lines">
+          <div class="ph-line long"></div><div class="ph-line med"></div>
+          <div class="ph-line long"></div><div class="ph-line long"></div>
+          <div class="ph-line med"></div><div class="ph-line short"></div>
+        </div>
+      </div>
+
+      <div class="prose" style="margin-top:1.4rem;">
+        <p><strong>Brand opportunities</strong></p>
+        <p>[Evaluate how brands can take advantage of this trend — which sectors, brand types, or campaign objectives are best served? What are the risks or barriers? ~200 words.]</p>
+      </div>
+
+      <div class="placeholder">
+        <p class="placeholder-label">→ Relevant image, graph, or industry data visual</p>
+        <div style="height:80px;background:rgba(26,71,42,0.06);border-radius:4px;display:flex;align-items:center;justify-content:center;">
+          <span style="font-size:0.62rem;color:var(--ink-muted);letter-spacing:0.1em;">INSERT VISUAL OR DATA</span>
+        </div>
+      </div>
+    </div>
+
     <!-- REFERENCES -->
     <div id="panel-refs" class="panel">
       <p class="section-eyebrow">FILE_05 · References</p>
@@ -692,7 +692,7 @@
 <p class="folder-footer">Anh Truong · 25832146 · MKT3039 AS2 · University of Northampton × Foreign Trade University</p>
 
 <script>
-  const keys = ['intro','gryff','slyth','raven','huffl','refs'];
+  const keys = ['intro','gryff','tiktok','checklist','trend','refs'];
   const tabs = document.querySelectorAll('.tab');
 
   function openTab(key, btn) {
