@@ -161,6 +161,7 @@
 
   .panel.active { display: grid; grid-template-columns: 1fr 320px; }
   .panel-gryff.active { grid-template-columns: 1fr 1fr; }
+  .panel-raven.active, .panel-slyth.active { grid-template-columns: 3fr 2fr; }
   .panel-gryff .content-col { overflow: visible; }
   .panel-gryff .visual-col { overflow: visible; align-self: start; position: sticky; top: 1rem; }
 
@@ -1132,7 +1133,7 @@
       <!-- VISUAL: intro -->
       <div class="visual-col">
         <p class="visual-col-label">Portfolio overview</p>
-        <div class="img-slot" style="aspect-ratio:4/3;">
+        <div class="img-slot" style="aspect-ratio:9/16; max-width:340px; max-height:620px; margin:0 auto;">
           <div class="img-slot-icon">🏰</div>
           <span class="img-slot-label">Cover image or brand visual<br>[add your image here]</span>
         </div>
