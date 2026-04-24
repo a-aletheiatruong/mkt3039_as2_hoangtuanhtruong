@@ -1,0 +1,1892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anh Truong · 25832146 · MKT3039 E-Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts/Serif/cmun-serif.css">
+<style>
+  /* Register italic/bold variants under the same family so font-style:italic works */
+  @font-face { font-family: 'Computer Modern'; src: url('https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts/Serif/cmunrm.woff') format('woff'); font-weight: normal; font-style: normal; }
+  @font-face { font-family: 'Computer Modern'; src: url('https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts/Serif-Italic/cmunti.woff') format('woff'); font-weight: normal; font-style: italic; }
+  @font-face { font-family: 'Computer Modern'; src: url('https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts/Serif-Bold/cmunbx.woff') format('woff'); font-weight: 700; font-style: normal; }
+  @font-face { font-family: 'Computer Modern'; src: url('https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts/Serif-BoldItalic/cmunbi.woff') format('woff'); font-weight: 700; font-style: italic; }
+</style>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --parchment:      #f5efe0;
+    --parchment-dark: #e8dfc8;
+    --ink:            #2c2318;
+    --ink-muted:      #6b5c45;
+    --folder-radius:  10px;
+    --g-main: #7B0D1E; --g-accent: #C8A951; --g-bg: #f9f0e8;
+    --h-main: #F0C040; --h-accent: #221F1F; --h-bg: #fdf8e8;
+    --r-main: #0E1F57; --r-accent: #946B2D; --r-bg: #e8ecf5;
+    --s-main: #1A472A; --s-accent: #A8A9AD; --s-bg: #eaf2ec;
+  }
+
+  body {
+    background: #d6caaf;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(0,0,0,0.03) 28px, rgba(0,0,0,0.03) 29px),
+      repeating-linear-gradient(90deg, transparent, transparent 28px, rgba(0,0,0,0.02) 28px, rgba(0,0,0,0.02) 29px);
+    min-height: 100vh;
+    font-family: 'Courier Prime', monospace;
+    color: var(--ink);
+    padding: 2.5rem 1.5rem 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    width: 100%;
+    max-width: 1100px;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .header-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .site-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 4vw, 2.6rem);
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+  }
+
+  .site-meta {
+    font-size: 0.75rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+  }
+
+  .divider {
+    width: 60px; height: 1px;
+    background: var(--ink-muted);
+    margin: 1rem auto;
+    opacity: 0.4;
+  }
+
+  /* ── 3-COLUMN OUTER WRAPPER ── */
+  /* [tabs col] [folder-body: content | visual] */
+  .folder-stack {
+    width: 100%;
+    max-width: 1300px;
+    display: flex;
+    align-items: stretch;
+  }
+
+  /* ── LEFT: FOLDER TABS ── */
+  .tab-col {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px 0;
+    flex-shrink: 0;
+    width: 180px;
+  }
+
+  .tab {
+    width: 100%;
+    padding: 11px 13px;
+    border-radius: 8px 0 0 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    font-family: 'Courier Prime', monospace;
+    transition: transform 0.15s ease, filter 0.15s ease;
+    user-select: none;
+    border: 1.5px solid rgba(0,0,0,0.18);
+    border-right: none;
+    text-align: left;
+    background: none;
+  }
+
+  .tab:hover  { transform: translateX(4px); filter: brightness(1.08); }
+  .tab.active { transform: translateX(6px); filter: brightness(1.1); }
+
+  .tab-intro { background: var(--parchment);     color: var(--ink); }
+  .tab-gryff { background: var(--g-main);         color: var(--g-accent); }
+  .tab-huffl { background: var(--h-main);         color: var(--h-accent); }
+  .tab-raven { background: var(--r-main);         color: var(--r-accent); }
+  .tab-slyth { background: var(--s-main);         color: var(--s-accent); }
+  .tab-refs  { background: var(--parchment-dark); color: var(--ink); }
+
+  .tab-code  { font-size: 0.55rem; opacity: 0.6; font-weight: 400; letter-spacing: 0.1em; }
+  .tab-label { font-size: 0.64rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; line-height: 1.3; white-space: normal; }
+
+  /* ── FOLDER BODY (wraps content + visual) ── */
+  .folder-body {
+    flex: 1;
+    background: var(--parchment);
+    border-radius: 0 var(--folder-radius) var(--folder-radius) 0;
+    border: 1.5px solid rgba(0,0,0,0.18);
+    border-left: none;
+    position: relative;
+    overflow: clip;
+    min-height: 560px;
+  }
+
+  .folder-body::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.014) 3px, rgba(0,0,0,0.014) 4px);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── PANEL (each section) ── */
+  /* Each panel is itself a 2-col grid: content left, visual right */
+  .panel {
+    display: none;
+    position: relative;
+    z-index: 1;
+    animation: fadeIn 0.28s ease;
+    min-height: 560px;
+  }
+
+  .panel.active { display: grid; grid-template-columns: 1fr 320px; }
+  .panel-gryff.active { grid-template-columns: 1fr 1fr; }
+  .panel-gryff .content-col { overflow: visible; }
+  .panel-gryff .visual-col { overflow: visible; align-self: start; position: sticky; top: 1rem; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* welcome state: full-width, no grid */
+  #panel-welcome.active { display: flex; }
+
+  /* house tint on content side only */
+  .panel-gryff .content-col { background: linear-gradient(160deg, var(--g-bg) 0%, transparent 50%); }
+  .panel-huffl .content-col { background: linear-gradient(160deg, var(--h-bg) 0%, transparent 50%); }
+  .panel-raven .content-col { background: linear-gradient(160deg, var(--r-bg) 0%, transparent 50%); }
+  .panel-slyth .content-col { background: linear-gradient(160deg, var(--s-bg) 0%, transparent 50%); }
+
+  /* ── CONTENT COLUMN (left of panel) ── */
+  .content-col {
+    padding: 2.2rem 2rem 2.5rem;
+    border-right: 1px solid rgba(0,0,0,0.08);
+    overflow-y: auto;
+  }
+
+  /* ── VISUAL COLUMN (right of panel) ── */
+  .visual-col {
+    padding: 1.8rem 1.4rem;
+    background: rgba(255,255,255,0.22);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-y: auto;
+  }
+
+  .visual-col-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 6px;
+  }
+
+  /* image placeholder block */
+  .img-slot {
+    width: 100%;
+    border: 1.5px dashed rgba(0,0,0,0.16);
+    border-radius: 7px;
+    background: rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 1.2rem 0.8rem;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .img-slot-icon { font-size: 1.5rem; opacity: 0.22; }
+
+  .img-slot-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.56rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  .img-slot img {
+    width: 100%;
+    border-radius: 5px;
+    display: block;
+  }
+
+  .img-caption {
+    font-family: 'Computer Modern', Georgia, serif;
+    font-style: italic;
+    font-size: 0.73rem;
+    color: var(--ink-muted);
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  /* ── WELCOME STATE ── */
+  .welcome-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 560px;
+    width: 100%;
+    text-align: center;
+    gap: 1rem;
+    padding: 2rem;
+  }
+
+  .welcome-icon { font-size: 2.4rem; opacity: 0.2; }
+
+  .welcome-text {
+    font-family: 'Computer Modern', Georgia, serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--ink-muted);
+  }
+
+  /* ── TYPOGRAPHY ── */
+  .house-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 4px 12px 4px 9px;
+    border-radius: 4px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1.1rem;
+  }
+
+  .badge-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .badge-gryff { background: var(--g-main); color: var(--g-accent); }
+  .badge-gryff .badge-dot { background: var(--g-accent); }
+  .badge-huffl { background: var(--h-main); color: var(--h-accent); }
+  .badge-huffl .badge-dot { background: var(--h-accent); }
+  .badge-raven { background: var(--r-main); color: var(--r-accent); }
+  .badge-raven .badge-dot { background: var(--r-accent); }
+  .badge-slyth { background: var(--s-main); color: var(--s-accent); }
+  .badge-slyth .badge-dot { background: var(--s-accent); }
+
+  .section-eyebrow {
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 0.45rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 2.4vw, 1.85rem);
+    font-weight: 600;
+    line-height: 1.15;
+    margin-bottom: 0.3rem;
+    color: var(--ink);
+  }
+
+  .section-title.gryff { color: var(--g-main); }
+  .section-title.huffl { color: #7a5c00; }
+  .section-title.raven { color: var(--r-main); }
+  .section-title.slyth { color: var(--s-main); }
+
+  .section-subtitle {
+    font-family: 'Computer Modern', Georgia, serif;
+    font-style: italic;
+    font-size: 0.86rem;
+    color: var(--ink-muted);
+    margin-bottom: 1.6rem;
+  }
+
+  .accent-bar { width: 36px; height: 3px; border-radius: 2px; margin-bottom: 1.3rem; }
+  .bar-gryff { background: var(--g-main); }
+  .bar-huffl { background: #7a5c00; }
+  .bar-raven { background: var(--r-main); }
+  .bar-slyth { background: var(--s-main); }
+  .bar-ink   { background: var(--ink); }
+
+  .prose {
+    font-family: 'Computer Modern', Georgia, serif;
+    font-size: 0.88rem;
+    line-height: 1.78;
+    color: var(--ink);
+  }
+
+  .prose p + p { margin-top: 0.9em; }
+  .prose strong { font-weight: 700; }
+
+  /* ── INTRO GRID ── */
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+    margin-top: 1.4rem;
+  }
+
+  .info-card {
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 7px;
+    padding: 0.9rem 1.1rem;
+  }
+
+  .info-card-label {
+    font-size: 0.56rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 0.25rem;
+  }
+
+  .info-card-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.88rem;
+    color: var(--ink);
+  }
+
+  .section-nav { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 1.5rem; }
+
+  .nav-pill {
+    padding: 5px 13px;
+    border-radius: 20px;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 1.5px solid;
+    transition: all 0.15s;
+    background: transparent;
+    font-family: 'Courier Prime', monospace;
+  }
+
+  .nav-pill:hover { transform: translateY(-1px); }
+  .pill-gryff { border-color: var(--g-main); color: var(--g-main); }
+  .pill-gryff:hover { background: var(--g-main); color: var(--g-accent); }
+  .pill-huffl { border-color: #7a5c00; color: #7a5c00; }
+  .pill-huffl:hover { background: var(--h-main); color: var(--h-accent); }
+  .pill-raven { border-color: var(--r-main); color: var(--r-main); }
+  .pill-raven:hover { background: var(--r-main); color: var(--r-accent); }
+  .pill-slyth { border-color: var(--s-main); color: var(--s-main); }
+  .pill-slyth:hover { background: var(--s-main); color: var(--s-accent); }
+
+  /* ── CHECKLIST TABLE ── */
+  .checklist-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.72rem;
+    margin-top: 1rem;
+  }
+
+  .checklist-table th {
+    background: var(--r-main);
+    color: var(--r-accent);
+    padding: 7px 10px;
+    text-align: left;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    font-size: 0.58rem;
+  }
+
+  .checklist-table td {
+    padding: 7px 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    color: var(--ink);
+    vertical-align: top;
+  }
+
+  .checklist-table tr:nth-child(even) td { background: rgba(255,255,255,0.35); }
+  .check-pass { color: #2d6a2d; font-weight: 700; }
+  .check-fail { color: #8b0000; font-weight: 700; }
+  .check-part { color: #7a5c00; font-weight: 700; }
+
+  /* ── REFERENCES ── */
+  .ref-list { list-style: none; margin-top: 1rem; }
+
+  .ref-list li {
+    font-family: 'Computer Modern', Georgia, serif;
+    font-size: 0.87rem;
+    line-height: 1.7;
+    padding: 0.7rem 0 0.7rem 1.5rem;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    text-indent: -1.5rem;
+    color: var(--ink);
+  }
+
+  .ref-list li:last-child { border-bottom: none; }
+
+  /* ── FOOTER ── */
+  .folder-footer {
+    margin-top: 1.4rem;
+    text-align: center;
+    font-size: 0.58rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.12em;
+    opacity: 0.65;
+  }
+
+  /* ── LADDER CIRCLE (Page 2) ── */
+  .ladder-wrap { display: flex; flex-direction: column; gap: 0.8rem; }
+  .ladder-circle {
+    position: relative;
+    width: 100%;
+    padding-top: 115%;
+  }
+  .ladder-img {
+    position: absolute;
+    width: 40%;
+    aspect-ratio: 3/4;
+    border-radius: 6px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.06);
+    border: 1.5px solid rgba(0,0,0,0.22);
+    cursor: pointer;
+    transition: all 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+  }
+  .ladder-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ladder-img-placeholder {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    text-align: center;
+    line-height: 1.5;
+    padding: 0.3rem;
+  }
+  .ladder-img-rung {
+    position: absolute;
+    top: 5px; left: 5px;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.5rem;
+    letter-spacing: 0.08em;
+    background: var(--g-main);
+    color: var(--g-accent);
+    padding: 2px 5px;
+    border-radius: 2px;
+    z-index: 2;
+  }
+  .ladder-img[data-pos="1"] { top: 0%;   left: 30%; }
+  .ladder-img[data-pos="2"] { top: 20%;  left: 60%; }
+  .ladder-img[data-pos="3"] { top: 52%;  left: 50%; }
+  .ladder-img[data-pos="4"] { top: 52%;  left: 10%; }
+  .ladder-img[data-pos="5"] { top: 20%;  left: 0%; }
+  .ladder-img.active {
+    top: 10%; left: 17%;
+    width: 66%;
+    z-index: 5;
+    box-shadow: 0 6px 20px rgba(123,13,30,0.28);
+    border-color: var(--g-main);
+  }
+  .ladder-img.dimmed { opacity: 0.55; transform: scale(0.85); }
+  .ladder-caption {
+    font-family: 'Computer Modern', Georgia, serif;
+    font-style: italic;
+    font-size: 0.78rem;
+    color: var(--ink);
+    line-height: 1.6;
+    text-align: center;
+    min-height: 5em;
+    padding: 0.7rem 0.4rem 0;
+    border-top: 1px solid rgba(0,0,0,0.1);
+  }
+  .ladder-caption-hint {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.56rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    text-align: center;
+  }
+  .ladder-caption strong {
+    display: block;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--g-main);
+    font-style: normal;
+    margin-bottom: 0.3rem;
+  }
+
+  /* ── TIKTOK: stacked zones + aligned carousel cards ── */
+  .panel-tiktok.active { display: block; grid-template-columns: none; }
+  .panel-tiktok .content-col,
+  .panel-tiktok .visual-col { display: none; }
+  .tiktok-stack { display: flex; flex-direction: column; }
+  .tiktok-row {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+  .tiktok-row.full-row { grid-template-columns: 1fr; }
+  .tiktok-row:last-child { border-bottom: none; }
+  .tiktok-row > .zone-prose {
+    padding: 1.8rem 2rem;
+    background: linear-gradient(160deg, var(--h-bg) 0%, transparent 60%);
+  }
+  .tiktok-row.header-row > .zone-prose {
+    padding-top: 2.2rem;
+  }
+  .tiktok-row > .zone-card {
+    padding: 1.5rem 1.2rem;
+    background: rgba(255,255,255,0.28);
+    border-left: 1px solid rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .tiktok-row.header-row > .zone-card {
+    background: rgba(240,192,64,0.1);
+    align-items: center;
+    justify-content: center;
+  }
+  .zone-card.bg-dominant { background: #d4dbe8; }
+  .zone-card.bg-moderate { background: #b08a5e; }
+  .zone-card.bg-weak {
+    background: #a09890;
+    border-left-style: dashed;
+    border-left-width: 2px;
+    border-left-color: rgba(0,0,0,0.35);
+  }
+  .zone-card.bg-moderate .zone-card-label,
+  .zone-card.bg-moderate .zone-card-caption,
+  .zone-card.bg-weak .zone-card-label,
+  .zone-card.bg-weak .zone-card-caption {
+    color: #fff;
+  }
+  .zone-card.bg-moderate .zone-card-label,
+  .zone-card.bg-weak .zone-card-label {
+    border-bottom-color: rgba(255,255,255,0.35);
+  }
+  .carousel {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    aspect-ratio: 9/16;
+    max-height: 620px;
+    margin: 0 auto;
+    border: 1.5px dashed rgba(0,0,0,0.18);
+    border-radius: 6px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.04);
+  }
+  .zone-card-still {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    aspect-ratio: 9/16;
+    max-height: 620px;
+    margin: 0 auto;
+    border: 1.5px dashed rgba(0,0,0,0.28);
+    border-radius: 6px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.06);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 6px; padding: 1rem 0.6rem;
+    text-align: center;
+  }
+  .zone-card-still img { width: 100%; height: 100%; object-fit: cover; }
+  .carousel-slide {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 6px; padding: 1rem 0.6rem;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .carousel-slide.active { opacity: 1; pointer-events: auto; }
+  .carousel-slide img { width: 100%; height: 100%; object-fit: cover; }
+  .carousel-slide .img-slot-icon { font-size: 1.4rem; opacity: 0.22; }
+  .carousel-slide .img-slot-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+  .carousel-next {
+    position: absolute; right: 8px; bottom: 8px;
+    width: 30px; height: 30px;
+    background: rgba(34,31,31,0.82);
+    color: var(--h-main);
+    border: none; border-radius: 50%;
+    font-size: 1rem; line-height: 1;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 3;
+    transition: background 0.15s;
+    font-family: 'Playfair Display', serif;
+  }
+  .carousel-next:hover { background: rgba(34,31,31,1); }
+  .carousel-counter {
+    position: absolute; left: 8px; bottom: 8px;
+    background: rgba(34,31,31,0.72);
+    color: var(--h-main);
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.54rem;
+    letter-spacing: 0.1em;
+    padding: 3px 7px;
+    border-radius: 3px;
+    z-index: 3;
+  }
+  .zone-card-label {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 5px;
+  }
+  .zone-card-caption {
+    font-family: 'Computer Modern', Georgia, serif;
+    font-style: italic;
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+    line-height: 1.55;
+    text-align: center;
+  }
+  .figure-inline {
+    margin: 1.3rem 0;
+    padding: 1rem;
+    background: rgba(255,255,255,0.45);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 6px;
+  }
+  .figure-inline .img-slot {
+    aspect-ratio: 16/9;
+    margin-bottom: 0.6rem;
+  }
+  .figure-caption {
+    font-family: 'Computer Modern', Georgia, serif;
+    font-style: italic;
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    text-align: center;
+    line-height: 1.5;
+  }
+  .figure-caption strong {
+    font-family: 'Courier Prime', monospace;
+    font-style: normal;
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  /* ── WEBSITE CHECKLIST: fake navigator ── */
+  .fake-nav-browser {
+    background: rgba(255,255,255,0.65);
+    border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 7px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .fake-nav-topbar {
+    background: var(--r-main);
+    color: var(--r-accent);
+    padding: 8px 11px;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.56rem;
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+  }
+  .fake-nav-dots {
+    display: inline-flex; gap: 5px; margin-right: 12px;
+  }
+  .fake-nav-dots span {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--r-accent); opacity: 0.55;
+  }
+  .fake-nav-url { opacity: 0.75; }
+  .fake-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    background: linear-gradient(180deg, rgba(14,31,87,0.06) 0%, transparent 100%);
+  }
+  .fake-profile-avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--r-main);
+    color: var(--r-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .fake-profile-text { line-height: 1.15; }
+  .fake-profile-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.82rem;
+    color: var(--ink);
+  }
+  .fake-profile-house {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.54rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--r-main);
+    margin-top: 2px;
+  }
+  .fake-points {
+    margin-left: auto;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.54rem;
+    letter-spacing: 0.08em;
+    text-align: right;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+  }
+  .fake-points strong {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--s-main);
+    display: block;
+    letter-spacing: 0;
+  }
+  .fake-nav-list { list-style: none; padding: 0.3rem 0; margin: 0; }
+  .fake-nav-item { border-bottom: 1px solid rgba(0,0,0,0.05); }
+  .fake-nav-item:last-child { border-bottom: none; }
+  .fake-nav-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0.65rem 1rem;
+    background: none;
+    border: none;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s;
+  }
+  .fake-nav-trigger:hover { background: rgba(14,31,87,0.06); }
+  .fake-nav-trigger.open { background: rgba(14,31,87,0.09); color: var(--r-main); font-weight: 700; }
+  .fake-nav-chevron { font-size: 0.65rem; transition: transform 0.22s; opacity: 0.55; }
+  .fake-nav-trigger.open .fake-nav-chevron { transform: rotate(90deg); }
+  .fake-nav-desc {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.28s ease;
+    background: rgba(14,31,87,0.03);
+  }
+  .fake-nav-desc-inner {
+    padding: 0.55rem 1rem 0.6rem 2.2rem;
+    font-family: 'Computer Modern', Georgia, serif;
+    font-style: italic;
+    font-size: 0.7rem;
+    line-height: 1.55;
+    color: var(--ink-muted);
+    border-top: 1px solid rgba(0,0,0,0.05);
+  }
+  .fake-nav-desc.open { max-height: 240px; }
+  .fake-nav-sub {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.28s ease;
+    background: rgba(14,31,87,0.04);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .fake-nav-sub.open { max-height: 320px; }
+  .fake-nav-sub li {
+    padding: 0.5rem 1rem 0.5rem 2.2rem;
+    font-family: 'Computer Modern', Georgia, serif;
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    border-top: 1px solid rgba(0,0,0,0.05);
+    cursor: default;
+    transition: color 0.15s;
+  }
+  .fake-nav-sub li:hover { color: var(--r-main); }
+  .fake-nav-note {
+    font-family: 'Computer Modern', Georgia, serif;
+    font-style: italic;
+    font-size: 0.7rem;
+    color: var(--ink-muted);
+    padding: 0.6rem 1rem;
+    background: rgba(14,31,87,0.03);
+    text-align: center;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  .fake-nav-caption {
+    font-family: 'Computer Modern', Georgia, serif;
+    font-style: italic;
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+    line-height: 1.55;
+    text-align: center;
+    padding: 0 0.4rem;
+  }
+
+  /* ── TREND TIMELINE + VIDEOS ── */
+  .trend-intro {
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--s-main);
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  .trend-year {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--ink);
+    margin-bottom: 0.7rem;
+    letter-spacing: 0.05em;
+  }
+  .trend-timeline {
+    position: relative;
+    padding-left: 1.9rem;
+    margin: 0.3rem 0 1.2rem;
+  }
+  .trend-timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px; top: 14px; bottom: 14px;
+    width: 2px;
+    background: var(--s-main);
+    opacity: 0.45;
+  }
+  .timeline-node { position: relative; padding-bottom: 1.4rem; }
+  .timeline-node::before {
+    content: '';
+    position: absolute;
+    left: -1.9rem; top: 6px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--s-main);
+    border: 3px solid var(--s-bg);
+    box-shadow: 0 0 0 1.5px var(--s-main);
+    transition: all 0.2s;
+  }
+  .timeline-node.highlight::before {
+    background: var(--s-accent);
+    box-shadow: 0 0 0 1.5px var(--s-main), 0 0 0 5px rgba(26,71,42,0.2);
+  }
+  .timeline-date-btn {
+    display: block;
+    background: none; border: none;
+    font-family: 'Courier Prime', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--s-main);
+    font-weight: 700;
+    padding: 0;
+    cursor: pointer;
+    margin-bottom: 0.6rem;
+    text-align: left;
+  }
+  .timeline-date-btn:hover { text-decoration: underline; }
+  .timeline-video-card {
+    background: rgba(255,255,255,0.55);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 6px;
+    padding: 0.7rem;
+    transition: box-shadow 0.25s, border-color 0.25s;
+  }
+  .timeline-video-card.highlight {
+    border-color: var(--s-main);
+    box-shadow: 0 0 0 2px rgba(26,71,42,0.25);
+  }
+  .timeline-video-card video {
+    width: 100%;
+    aspect-ratio: 9/16;
+    max-height: 280px;
+    display: block;
+    border-radius: 5px;
+    background: #000;
+    margin-bottom: 0.6rem;
+  }
+  .timeline-video-placeholder {
+    width: 100%;
+    aspect-ratio: 9/16;
+    max-height: 280px;
+    background: rgba(0,0,0,0.06);
+    border: 1.5px dashed rgba(0,0,0,0.18);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-align: center;
+    padding: 1rem 0.5rem;
+    margin-bottom: 0.6rem;
+  }
+  .timeline-citation {
+    font-family: 'Computer Modern', Georgia, serif;
+    font-style: italic;
+    font-size: 0.7rem;
+    color: var(--ink-muted);
+    line-height: 1.55;
+  }
+  .timeline-citation .cite-tag {
+    font-family: 'Courier Prime', monospace;
+    font-style: normal;
+    font-size: 0.56rem;
+    letter-spacing: 0.12em;
+    color: var(--s-main);
+    display: block;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .timeline-citation a {
+    color: var(--s-main);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--s-main);
+    word-break: break-all;
+  }
+
+  /* ── MOBILE: stack everything ── */
+  @media (max-width: 780px) {
+    .folder-stack { flex-direction: column; }
+
+    .tab-col {
+      width: 100%;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 4px;
+      padding: 0 0 4px;
+    }
+
+    .tab {
+      flex: 1 1 auto;
+      border-radius: 6px 6px 0 0;
+      border: 1.5px solid rgba(0,0,0,0.18);
+      border-bottom: none;
+      padding: 8px 9px;
+    }
+
+    .tab:hover  { transform: translateY(-2px); }
+    .tab.active { transform: translateY(2px); }
+
+    .folder-body {
+      border-radius: 0 0 var(--folder-radius) var(--folder-radius);
+      border-left: 1.5px solid rgba(0,0,0,0.18);
+      border-top: none;
+    }
+
+    .panel.active { grid-template-columns: 1fr; }
+
+    .content-col { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.08); }
+
+    .visual-col { padding: 1.4rem 1.2rem; }
+  }
+
+  @media (max-width: 500px) {
+    body { padding: 1.2rem 0.7rem 3rem; }
+    .content-col { padding: 1.5rem 1.2rem; }
+    .intro-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <p class="header-label">MKT3039 · Digital Marketing · AS2</p>
+  <h1 class="site-title">Anh Truong</h1>
+  <p class="site-meta">Student ID: 25832146 &nbsp;·&nbsp; University of Northampton &nbsp;·&nbsp; BA (Hons) Marketing Management</p>
+  <div class="divider"></div>
+  <p class="site-meta" style="font-style:italic;opacity:0.7;">Select a folder to begin</p>
+</header>
+
+<div class="folder-stack">
+
+  <!-- ── FOLDER TABS (far left) ── -->
+  <div class="tab-col" role="tablist">
+    <button class="tab tab-intro" onclick="openTab('intro',this)">
+      <span class="tab-code">FILE_01//</span>
+      <span class="tab-label">Introduction</span>
+    </button>
+    <button class="tab tab-gryff" onclick="openTab('gryff',this)">
+      <span class="tab-code">FILE_02//</span>
+      <span class="tab-label">Ladder of Engagement</span>
+    </button>
+    <button class="tab tab-huffl" onclick="openTab('tiktok',this)">
+      <span class="tab-code">FILE_03//</span>
+      <span class="tab-label">TikTok Evaluation</span>
+    </button>
+    <button class="tab tab-raven" onclick="openTab('checklist',this)">
+      <span class="tab-code">FILE_04//</span>
+      <span class="tab-label">Website Checklist</span>
+    </button>
+    <button class="tab tab-slyth" onclick="openTab('trend',this)">
+      <span class="tab-code">FILE_05//</span>
+      <span class="tab-label">Trend Analysis</span>
+    </button>
+    <button class="tab tab-refs" onclick="openTab('refs',this)">
+      <span class="tab-code">FILE_06//</span>
+      <span class="tab-label">Conclusion &amp; References</span>
+    </button>
+  </div>
+
+  <!-- ── FOLDER BODY ── -->
+  <div class="folder-body">
+
+    <!-- WELCOME (default) -->
+    <div id="panel-welcome" class="panel active">
+      <div class="welcome-state">
+        <div class="welcome-icon">📂</div>
+        <p class="welcome-text">Select a folder tab to open a section.</p>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         INTRO
+    ═══════════════════════════════════════ -->
+    <div id="panel-intro" class="panel">
+      <div class="content-col">
+        <p class="section-eyebrow">FILE_01 · Introduction</p>
+        <h2 class="section-title">Welcome to my E-Portfolio</h2>
+        <p class="section-subtitle">Digital Marketing · MKT3039 · Assessment 2</p>
+        <div class="accent-bar bar-ink"></div>
+
+        <div class="prose">
+          <p><em>Digital marketing</em>'s defining challenge is no longer attention but permission: securing sustained, willingly granted access to consumers in an environment that has structurally inverted the broadcaster–audience relationship. This e-portfolio examines how Warner Bros. Discovery's (WBD) Wizarding World franchise builds and sustains such permission across three decades of multi-channel brand architecture.</p>
+          <p>Four interlocking analyses argue a single thesis — that IP-rich brands accumulate permission not through campaigns but through <strong>infrastructure</strong>. Section 2 maps the engagement ladder WBD has built; Section 3 evaluates TikTok's structural fit to extend it; Section 4 assesses HarryPotter.com's role in sustaining it; Section 5 identifies the trend that operationalises it.</p>
+        </div>
+
+        <div class="intro-grid">
+          <div class="info-card">
+            <p class="info-card-label">Student</p>
+            <p class="info-card-value">Anh Truong · 25832146</p>
+          </div>
+          <div class="info-card">
+            <p class="info-card-label">Module</p>
+            <p class="info-card-value">MKT3039 · Digital Marketing</p>
+          </div>
+          <div class="info-card">
+            <p class="info-card-label">Programme</p>
+            <p class="info-card-value">BA (Hons) Marketing Management</p>
+          </div>
+          <div class="info-card">
+            <p class="info-card-label">Partner Institution</p>
+            <p class="info-card-value">Foreign Trade University, Hanoi</p>
+          </div>
+        </div>
+
+        <div style="margin-top:1.8rem;">
+          <p class="section-eyebrow" style="margin-bottom:0.7rem;">Navigate to a section</p>
+          <div class="section-nav">
+            <button class="nav-pill pill-gryff" onclick="openTabByIndex(1)">Ladder of Engagement</button>
+            <button class="nav-pill pill-huffl" onclick="openTabByIndex(2)">TikTok Evaluation</button>
+            <button class="nav-pill pill-raven" onclick="openTabByIndex(3)">Website Checklist</button>
+            <button class="nav-pill pill-slyth" onclick="openTabByIndex(4)">Trend Analysis</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- VISUAL: intro -->
+      <div class="visual-col">
+        <p class="visual-col-label">Portfolio overview</p>
+        <div class="img-slot" style="aspect-ratio:4/3;">
+          <div class="img-slot-icon">🏰</div>
+          <span class="img-slot-label">Cover image or brand visual<br>[add your image here]</span>
+        </div>
+        <p class="img-caption">[Optional caption for cover image]</p>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         GRYFFINDOR: LADDER OF ENGAGEMENT
+    ═══════════════════════════════════════ -->
+    <div id="panel-gryff" class="panel panel-gryff">
+      <div class="content-col">
+        <div class="house-badge badge-gryff"><span class="badge-dot"></span>Gryffindor · FILE_02</div>
+        <p class="section-eyebrow">Section 2 · 546 words</p>
+        <h2 class="section-title gryff">Ladder of Engagement</h2>
+        <p class="section-subtitle">How WBD built a five-rung permission infrastructure</p>
+        <div class="accent-bar bar-gryff"></div>
+
+        <div class="prose">
+          <p>The <em>Ladder of Engagement</em>, rooted in Godin's (1999) permission marketing philosophy, describes the progressive depth of consumer involvement with a brand, from passive consumption to active advocacy. The model holds that sustainable brand relationships compound incrementally rather than through interruptive mass communication. Table 1 defines the five rungs.</p>
+        </div>
+
+        <table class="checklist-table" style="margin-top:1rem;">
+          <thead>
+            <tr><th>Rung</th><th>Definition</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Situational permission</td><td>Temporary consent granted in response to a specific consumer need or inquiry</td></tr>
+            <tr><td>Brand trust</td><td>Permission derived from the company's established reputation rather than individual interaction</td></tr>
+            <tr><td>Personal relationships</td><td>Trust built through direct, personal contact — powerful but difficult to scale</td></tr>
+            <tr><td>Points permission</td><td>Formalised loyalty maintained through reward currency that incentivises continued engagement</td></tr>
+            <tr><td>Intravenous permission</td><td>Full delegation of decision-making authority to the marketer, without requiring consent per transaction</td></tr>
+          </tbody>
+        </table>
+        <p class="figure-caption" style="margin-top:0.5rem;"><strong>Table 1.</strong> The Permission Ladder (adapted from Godin, 1999, chapter 6).</p>
+
+        <div class="prose" style="margin-top:1.2rem;">
+          <p>At <em>situational permission</em> entry rung, consent is temporary and context-specific, granted in response to a particular need rather than any sustained relationship with the brand (Godin, 1999, chapter 6). For Harry Potter and the Wizarding World brand, this moment is crystallised through the Harry Potter books: Rowling's narrative converts a stranger into a willing audience through curiosity, word-of-mouth, or school-chum recommendation (Brown and Patterson, 2010, pp.547–548; Image 1).</p>
+
+          <p>Once situational permission is granted comes <em>brand trust</em>. This rung does not require the consumer to know the company personally — reputation alone is sufficient to sustain engagement, though Godin (1999, chapter 6) warns it is equally vulnerable to being squandered by poor marketing decisions. WBD's acquisition of the Harry Potter cinematic rights positioned the studio as the authoritative custodian of the franchise, with its identity as a major global media house lending institutional credibility to every subsequent release (Amrar, 2024). The cumulative worldwide gross of approximately £5.78B across the film series is evidence of brand trust operating at scale — audiences returned repeatedly not because they were individually persuaded, but because WBD had earned their anticipation (Box Office Mojo, no date-a – h).</p>
+
+          <p><em>Personal relationships</em> rest on individual human trust rather than brand-to-consumer broadcasting, and cannot be manufactured by the marketer directly (Godin, 1999, chapter 6). The Wizarding World diverges from conventional brand strategy here: fan-fictions, tribute wikis, and "Wizard Rock" networks operate entirely outside WBD's control yet deepen brand permission on its behalf (Brown and Patterson, 2010, pp.544, 546; Image 2). Because WBD cannot own this rung, it must protect the conditions that sustain it — consistent lore and accessible canon (Brown and Patterson, 2010, p.551; Hashem et al., 2024, pp.20031, 20035).</p>
+
+          <p>At <em>points permission</em>, Godin (1999, chapter 6) describes formalised loyalty structures that make sustained attention materially worthwhile. WBD operationalises this through gamification: the Sorting Hat quiz on HarryPotter.com assigns house identity that functions as loyalty currency, shaping purchasing behaviour toward house-specific merchandise (Image 3). The Harry Potter Shop reinforces this through tiered products — from keyrings to personalised wands, Hogwarts trunks, and LEGO sets — structuring reward pathways at escalating investment levels (Brown, 2002, pp.9–10; Brown and Patterson, 2010, p.543; Warner Bros Merchandise, no date). The personalisation payoff is identity, not just products.</p>
+
+          <p><em>Intravenous permission</em> represents the ceiling of Godin's ladder. WBD achieves this through two mechanisms — digital and physical. On HarryPotter.com, the Patronus experience and Sorting Hat quiz assign identity algorithmically, with fans accepting these designations as their own (Image 3). At the Wizarding World theme parks, this reaches its most literal expression: guests surrender to a brand-designed reality, allowing WBD to architect their sensory experience from arrival to exit (Brown, 2002, p.10; Hashem et al., 2024, pp.20027, 20039; Images 4–5).</p>
+
+          <p>Across all five rungs, WBD's engagement strategy demonstrates that permission compounds over decades, converting casual readers into lifelong brand participants who recruit others into the ladder beneath them.</p>
+        </div>
+      </div>
+
+      <!-- VISUAL: Ladder (interactive circle) -->
+      <div class="visual-col">
+        <p class="visual-col-label">Images 1–5 · Click a rung</p>
+
+        <div class="ladder-wrap">
+          <div class="ladder-circle" id="ladder-circle">
+            <div class="ladder-img" data-pos="1" data-rung="Rung 1" data-caption="<strong>Image 1 · Situational permission</strong>A consumer queue in Sunnyvale (2007) represents individuals who have voluntarily granted the brand temporary, context-specific access in exchange for the immediate narrative incentive of the final book (Sheppard, 2007).">
+              <span class="ladder-img-rung">RUNG 1</span>
+              <span class="ladder-img-placeholder">Image 1<br>Borders queue<br>[add image]</span>
+            </div>
+            <div class="ladder-img" data-pos="2" data-rung="Rung 3" data-caption="<strong>Image 2 · Personal relationships</strong>The volume of 571,811 fan-authored narratives on <em>Archive of Our Own</em> (AO3) quantifies a decentralised deepening of brand permission, where the ladder is sustained by peer-to-peer trust rather than corporate broadcasting (compiled by Author, 2026).">
+              <span class="ladder-img-rung">RUNG 3</span>
+              <span class="ladder-img-placeholder">Image 2<br>AO3 fan works<br>[add image]</span>
+            </div>
+            <div class="ladder-img" data-pos="3" data-rung="Rung 4" data-caption="<strong>Image 3 · Points permission</strong>The Harrypotter.com user interface operationalises <em>points permission</em> through a digital identity profile and by embedding 'Slytherin House Merchandise' directly below these algorithmic designations, bridging the gap between gamified engagement and tangible transactional behaviour (compiled by Author, 2026).">
+              <span class="ladder-img-rung">RUNG 4</span>
+              <span class="ladder-img-placeholder">Image 3<br>Slytherin dashboard<br>[add image]</span>
+            </div>
+            <div class="ladder-img" data-pos="4" data-rung="Rung 5" data-caption="<strong>Image 4 · Intravenous (physical)</strong>By utilising <em>Métro-Floo</em> portals to transition guests between international settings, WBD eliminates external reality, maintaining a closed-loop visual and spatial narrative that exemplifies the 'brand-designed reality' ([Entrance to the Métro-Floo at The Wizarding World of Harry Potter], 2019).">
+              <span class="ladder-img-rung">RUNG 5</span>
+              <span class="ladder-img-placeholder">Image 4<br>Métro-Floo portal<br>[add image]</span>
+            </div>
+            <div class="ladder-img" data-pos="5" data-rung="Rung 5" data-caption="<strong>Image 5 · Intravenous (gustatory)</strong>The integration of Wizarding World beverage <em>Butterbeer</em> demonstrates the expansion of brand authority into the consumer's gustatory experience, where even basic physiological choices are pre-determined by the marketer ([Family toasting with Butterbeer in a restaurant], 2019).">
+              <span class="ladder-img-rung">RUNG 5</span>
+              <span class="ladder-img-placeholder">Image 5<br>Butterbeer toasting<br>[add image]</span>
+            </div>
+          </div>
+
+          <div class="ladder-caption" id="ladder-caption">
+            <span class="ladder-caption-hint">Click any rung to enlarge &amp; read caption</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         HUFFLEPUFF: TIKTOK EVALUATION
+    ═══════════════════════════════════════ -->
+    <div id="panel-tiktok" class="panel panel-huffl">
+      <div class="tiktok-stack">
+
+        <!-- Row: HEADER + intro card -->
+        <div class="tiktok-row header-row">
+          <div class="zone-prose">
+            <div class="house-badge badge-huffl"><span class="badge-dot"></span>Hufflepuff · FILE_03</div>
+            <p class="section-eyebrow">Section 3 · 732 words</p>
+            <h2 class="section-title huffl">TikTok Evaluation</h2>
+            <p class="section-subtitle">Platform critique using Tuten &amp; Solomon's (2018) Four Zones</p>
+            <div class="accent-bar bar-huffl"></div>
+
+            <div class="prose">
+              <p><strong>3.1 · TikTok and the marketer's use case</strong></p>
+              <p>TikTok launched globally in 2018 and reached over one billion monthly active users by 2023 (Bursztynsky, 2021). Its defining feature is the <em>For You</em> page (FYP), which releases each upload to a 500–1,000-user test audience and scales it only if watch-time and share signals clear internal thresholds (Chen, 2026). Content relevance outweighs creator popularity (Lang, 2025), so the conventional Paid-Owned-Earned hierarchy inverts (Chaffey and Ellis-Chadwick, 2022, p.6). Post legibility matters more than account strength. TikTok is therefore a distribution engine first and a community second.</p>
+            </div>
+          </div>
+          <div class="zone-card">
+            <p class="zone-card-label">3.1 · Orientation</p>
+            <p class="zone-card-caption">Publishing and Entertainment are TikTok's dominant zones; Community and Commerce are attenuated. Cards below evidence the argument.</p>
+          </div>
+        </div>
+
+        <!-- Row: 3.2 intro with inline Figure 1 (full width) -->
+        <div class="tiktok-row full-row">
+          <div class="zone-prose">
+            <div class="prose">
+              <p><strong>3.2 · Platform critique — the Four Zones framework</strong></p>
+              <p>This section applies Tuten and Solomon's (2018, chapter 1) Four Zones framework, which groups social channels by primary orientation — community, publishing, entertainment, or commerce. Figure 1 maps TikTok's weighting across the four zones.</p>
+            </div>
+
+            <div class="figure-inline">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 680" font-family="Georgia, 'Times New Roman', serif" style="width:100%;height:auto;display:block;">
+                <defs>
+                  <pattern id="dominant" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <rect width="8" height="8" fill="#d4dbe8"/>
+                  </pattern>
+                  <pattern id="moderate" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <rect width="8" height="8" fill="#eadfc9"/>
+                  </pattern>
+                  <pattern id="weak" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
+                    <rect width="6" height="6" fill="#ece9e4"/>
+                    <path d="M 0,6 L 6,0" stroke="#c9c5bd" stroke-width="0.6"/>
+                  </pattern>
+                </defs>
+                <text x="450" y="50" text-anchor="middle" font-size="20" font-weight="bold" fill="#2a2a2a">TikTok's Four Zones weighting</text>
+                <text x="450" y="74" text-anchor="middle" font-size="14" font-style="italic" fill="#555">Adapted from Tuten and Solomon (2018, ch. 1)</text>
+                <g>
+                  <rect x="155" y="115" width="280" height="180" rx="4" fill="url(#dominant)" stroke="#5e7299" stroke-width="1.5"/>
+                  <text x="295" y="165" text-anchor="middle" font-size="18" font-weight="bold" fill="#2a2a2a">Social Publishing</text>
+                  <text x="295" y="200" text-anchor="middle" font-size="15" fill="#3a3a3a" font-style="italic">Dominant</text>
+                  <text x="295" y="234" text-anchor="middle" font-size="12" fill="#3a3a3a">Knowledge-sharing orientation;</text>
+                  <text x="295" y="250" text-anchor="middle" font-size="12" fill="#3a3a3a">FYP as high-velocity distribution</text>
+                  <text x="295" y="266" text-anchor="middle" font-size="12" fill="#3a3a3a">mechanism for short-form video</text>
+                </g>
+                <g>
+                  <rect x="465" y="115" width="280" height="180" rx="4" fill="url(#dominant)" stroke="#5e7299" stroke-width="1.5"/>
+                  <text x="605" y="165" text-anchor="middle" font-size="18" font-weight="bold" fill="#2a2a2a">Social Entertainment</text>
+                  <text x="605" y="200" text-anchor="middle" font-size="15" fill="#3a3a3a" font-style="italic">Dominant</text>
+                  <text x="605" y="234" text-anchor="middle" font-size="12" fill="#3a3a3a">Entertainment-sharing orientation;</text>
+                  <text x="605" y="250" text-anchor="middle" font-size="12" fill="#3a3a3a">trending sounds, filters, and duets</text>
+                  <text x="605" y="266" text-anchor="middle" font-size="12" fill="#3a3a3a">enable play-as-identity and fantasy</text>
+                </g>
+                <g>
+                  <rect x="155" y="325" width="280" height="180" rx="4" fill="url(#moderate)" stroke="#b08a5e" stroke-width="1.5"/>
+                  <text x="295" y="375" text-anchor="middle" font-size="18" font-weight="bold" fill="#2a2a2a">Social Community</text>
+                  <text x="295" y="410" text-anchor="middle" font-size="15" fill="#3a3a3a" font-style="italic">Moderate</text>
+                  <text x="295" y="444" text-anchor="middle" font-size="12" fill="#3a3a3a">Comment threads host conversation,</text>
+                  <text x="295" y="460" text-anchor="middle" font-size="12" fill="#3a3a3a">but algorithmic feed architecture</text>
+                  <text x="295" y="476" text-anchor="middle" font-size="12" fill="#3a3a3a">dissipates durable group structure</text>
+                </g>
+                <g>
+                  <rect x="465" y="325" width="280" height="180" rx="4" fill="url(#weak)" stroke="#a09890" stroke-width="1.5" stroke-dasharray="4,3"/>
+                  <text x="605" y="375" text-anchor="middle" font-size="18" font-weight="bold" fill="#2a2a2a">Social Commerce</text>
+                  <text x="605" y="410" text-anchor="middle" font-size="15" fill="#3a3a3a" font-style="italic">Weak (developing)</text>
+                  <text x="605" y="444" text-anchor="middle" font-size="12" fill="#3a3a3a">TikTok Shop and creator affiliate</text>
+                  <text x="605" y="460" text-anchor="middle" font-size="12" fill="#3a3a3a">mechanics exist but remain minor</text>
+                  <text x="605" y="476" text-anchor="middle" font-size="12" fill="#3a3a3a">relative to publishing and play</text>
+                </g>
+                <g transform="translate(260, 545)">
+                  <rect x="0" y="0" width="18" height="14" fill="url(#dominant)" stroke="#5e7299" stroke-width="1"/>
+                  <text x="24" y="12" font-size="12" fill="#3a3a3a">Dominant</text>
+                  <rect x="110" y="0" width="18" height="14" fill="url(#moderate)" stroke="#b08a5e" stroke-width="1"/>
+                  <text x="134" y="12" font-size="12" fill="#3a3a3a">Moderate</text>
+                  <rect x="220" y="0" width="18" height="14" fill="url(#weak)" stroke="#a09890" stroke-width="1" stroke-dasharray="3,2"/>
+                  <text x="244" y="12" font-size="12" fill="#3a3a3a">Weak (attenuated)</text>
+                </g>
+                <text x="450" y="610" text-anchor="middle" font-size="13" font-style="italic" fill="#2a2a2a">
+                  <tspan x="450" dy="0">Figure 1. TikTok's architecture privileges Publishing and Entertainment—zones organised</tspan>
+                  <tspan x="450" dy="18">around distribution and play—whilst Community interaction is structurally transient and</tspan>
+                  <tspan x="450" dy="18">Social Commerce remains the platform's least-developed zone.</tspan>
+                </text>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 3.2.1: Publishing · Card 1 (images 6–7 · per-slide captions) -->
+        <div class="tiktok-row">
+          <div class="zone-prose">
+            <div class="prose">
+              <p><strong>3.2.1 · Publishing</strong></p>
+              <p>The <em>social publishing</em> zone concerns the production and distribution of content, with knowledge-sharing as its orientation (Tuten and Solomon, 2018, chapter 7). TikTok is architecturally optimised for this zone. The FYP treats every upload as a shareable unit, maximising circulation velocity (Lang, 2025). Branded Hashtag Challenges, TikTok's flagship publishing format (Chaffey and Ellis-Chadwick, 2022, p.447), turn a brand-seeded hashtag into a distribution scaffold for user-generated content. WBD's 2025 <em>#BackToHogwarts</em> Creator Challenge exemplifies the mechanic, with top entries accumulating 1M+ likes (The Harry Potter Editorial Team, 2025; Image 6). The @harrypotter profile's pinned HBO series promo reached 20.4M views (Image 7). For IP-rich brands, Publishing is TikTok's strongest zone and a deliberate strategic fit.</p>
+            </div>
+          </div>
+          <div class="zone-card bg-dominant">
+            <p class="zone-card-label">3.2.1 · Publishing</p>
+            <div class="carousel" data-carousel="1">
+              <div class="carousel-slide active" data-caption="<strong>Image 6.</strong> The @harrypotter profile presents a carousel of pinned interactive formats (&ldquo;Choose a Wand&rdquo; / &ldquo;Choose a Character&rdquo;) and IP-led series promotion; 7.4M followers confirm the profile's role as a Publishing surface (compiled by Author, 2026).">
+                <div class="img-slot-icon">📱</div>
+                <span class="img-slot-label">Image 6<br>@harrypotter profile<br>[add image]</span>
+              </div>
+              <div class="carousel-slide" data-caption="<strong>Image 7.</strong> The #BackToHogwarts Branded Hashtag Challenge (2025) operationalises TikTok's flagship publishing format: a brand-seeded hashtag scaffolds 1M+-like user-generated entries, converting the FYP into a high-velocity distribution mechanism (The Harry Potter Editorial Team, 2025).">
+                <div class="img-slot-icon">📱</div>
+                <span class="img-slot-label">Image 7<br>#BackToHogwarts search<br>[add image]</span>
+              </div>
+              <div class="carousel-counter">1 / 2</div>
+              <button class="carousel-next" aria-label="Next image">›</button>
+            </div>
+            <p class="zone-card-caption" data-caption-for="1"><strong>Image 6.</strong> The @harrypotter profile presents a carousel of pinned interactive formats (&ldquo;Choose a Wand&rdquo; / &ldquo;Choose a Character&rdquo;) and IP-led series promotion; 7.4M followers confirm the profile's role as a Publishing surface (compiled by Author, 2026).</p>
+          </div>
+        </div>
+
+        <!-- Row 3.2.2: Community · Card 2 (3 images · static image-8 caption) -->
+        <div class="tiktok-row">
+          <div class="zone-prose">
+            <div class="prose">
+              <p><strong>3.2.2 · Community</strong></p>
+              <p><em>Social communities</em> are oriented around relationship-building rather than broadcasting (Tuten and Solomon, 2018, chapter 6). TikTok's architecture here is ambivalent: the comment system enables genuine multi-way exchange, yet the algorithmic feed dissipates durable group structure — what Kietzmann et al. (2011, pp.246–247) classify as a platform where "relationships hardly matter." The contradiction surfaces in organic fan activity. A video captioned "Everyone, pretend we're Hogwarts students in the comments," drew 3,427 threaded replies featuring in-character roleplay sustained across days (Image 8). This community interaction emerged on a fan account, not @harrypotter, and will likely disappear from the FYP within weeks. WBD benefits from spillover rather than cultivating community directly — consistent with Section 2's finding that the Wizarding World's <em>personal relationships</em> rung is sustained by fan infrastructure (AO3, Fandom Wiki, Wizard Rock networks) that WBD cannot manufacture and TikTok cannot replicate.</p>
+            </div>
+          </div>
+          <div class="zone-card bg-dominant">
+            <p class="zone-card-label">3.2.2 · Community</p>
+            <div class="carousel" data-carousel="2">
+              <div class="carousel-slide active">
+                <div class="img-slot-icon">💬</div>
+                <span class="img-slot-label">Image 8a<br>Hogwarts-students thread<br>[add image]</span>
+              </div>
+              <div class="carousel-slide">
+                <div class="img-slot-icon">💬</div>
+                <span class="img-slot-label">Image 8b<br>Thread detail<br>[add image]</span>
+              </div>
+              <div class="carousel-slide">
+                <div class="img-slot-icon">💬</div>
+                <span class="img-slot-label">Image 8c<br>Thread detail<br>[add image]</span>
+              </div>
+              <div class="carousel-counter">1 / 3</div>
+              <button class="carousel-next" aria-label="Next image">›</button>
+            </div>
+            <p class="zone-card-caption"><strong>Image 8.</strong> A fan-account video captioned &ldquo;Everyone, pretend we're Hogwarts students in the comments,&rdquo; drew 3,427 threaded replies in sustained, in-character roleplay — a Community moment emerging outside @harrypotter and structurally transient on the algorithmic feed (compiled by Author, 2026).</p>
+          </div>
+        </div>
+
+        <!-- Row 3.2.3: Entertainment · Card 3 (7 images · single Potter caption) -->
+        <div class="tiktok-row">
+          <div class="zone-prose">
+            <div class="prose">
+              <p><strong>3.2.3 · Entertainment</strong></p>
+              <p>The <em>social entertainment</em> zone is oriented around entertainment-sharing and play (Tuten and Solomon, 2018, chapter 8). TikTok is a structural fit. Trending sounds, AR filters, and duet mechanics are engineered for play-as-identity and play-as-fantasy (Tuten and Solomon, 2018, chapter 8). WBD leans into this logic. Interactive formats such as "Choose a wand to find the spell you need today" and "Choose a character (and swipe to reveal their quote)" (Image 6) invite identity performance and quiz-style engagement rather than information consumption. The brand positions itself inside the play-frame the platform rewards. Entertainment is TikTok's second area of deliberate, well-matched deployment.</p>
+            </div>
+          </div>
+          <div class="zone-card bg-moderate">
+            <p class="zone-card-label">3.2.3 · Entertainment</p>
+            <div class="carousel" data-carousel="3">
+              <div class="carousel-slide active">
+                <div class="img-slot-icon">🪄</div>
+                <span class="img-slot-label">Image 9a<br>Scourgify spell clip<br>[add image]</span>
+              </div>
+              <div class="carousel-slide">
+                <div class="img-slot-icon">🪄</div>
+                <span class="img-slot-label">Image 9b<br>[add image]</span>
+              </div>
+              <div class="carousel-slide">
+                <div class="img-slot-icon">🪄</div>
+                <span class="img-slot-label">Image 9c<br>[add image]</span>
+              </div>
+              <div class="carousel-slide">
+                <div class="img-slot-icon">🪄</div>
+                <span class="img-slot-label">Image 9d<br>[add image]</span>
+              </div>
+              <div class="carousel-slide">
+                <div class="img-slot-icon">🪄</div>
+                <span class="img-slot-label">Image 9e<br>[add image]</span>
+              </div>
+              <div class="carousel-slide">
+                <div class="img-slot-icon">🪄</div>
+                <span class="img-slot-label">Image 9f<br>[add image]</span>
+              </div>
+              <div class="carousel-slide">
+                <div class="img-slot-icon">🪄</div>
+                <span class="img-slot-label">Image 9g<br>[add image]</span>
+              </div>
+              <div class="carousel-counter">1 / 7</div>
+              <button class="carousel-next" aria-label="Next image">›</button>
+            </div>
+            <p class="zone-card-caption">Potter, H. (2026) <em>i could really do with scourgify rn because i do NOT want to do the dishes #harrypotter #magic #spells #wands&hellip;</em> [TikTok] 19 April. Available at: https://vm.tiktok.com/ZTkQa4Cy4/ (Accessed: 24 April 2026).</p>
+          </div>
+        </div>
+
+        <!-- Row 3.2.4: Commerce · Card 4 (1 image · commerce caption · dashed border) -->
+        <div class="tiktok-row">
+          <div class="zone-prose">
+            <div class="prose">
+              <p><strong>3.2.4 · Commerce</strong></p>
+              <p>The <em>social commerce</em> zone covers the use of social media to facilitate shopping and purchase (Tuten and Solomon, 2018, chapter 9). TikTok has developed commerce infrastructure — TikTok Shop, creator affiliate schemes, and shoppable links — but this zone remains the least mature (Tuten and Solomon, 2018, chapter 9). WBD's @harrypotter uses none of it. The profile bio directs users to Harrypotter.com (Image 6), and merchandise fulfilment is further delegated to an external Harry Potter Shop domain (see Section 4). For a franchise with £5.78B in cumulative film revenues, this absence is deliberate: WBD treats TikTok as upstream funnel, reserving transactional activity for owned channels where the <em>points permission</em> rung (Godin, 1999, chapter 6) can be operationalised through persistent identity, gamified loyalty, and house-conditional merchandising.</p>
+            </div>
+          </div>
+          <div class="zone-card bg-weak">
+            <p class="zone-card-label">3.2.4 · Commerce</p>
+            <div class="zone-card-still">
+              <div class="img-slot-icon" style="font-size:1.6rem;opacity:0.4;">🔗</div>
+              <span class="img-slot-label">Image 10<br>@harrypotter bio link →<br>HarryPotter.com<br>[add image]</span>
+            </div>
+            <p class="zone-card-caption">The @harrypotter TikTok profile demonstrates a deliberate avoidance of platform-native commerce features; by funneling its 7.4M followers toward an external URL (HarryPotter.com), WBD reserves transactional data for owned ecosystems to be fully controlled and monetized through persistent user profiles.</p>
+          </div>
+        </div>
+
+        <!-- Row: 3.3 Implications (full width) -->
+        <div class="tiktok-row full-row">
+          <div class="zone-prose">
+            <div class="prose">
+              <p><strong>3.3 · Implications for the engagement ladder</strong></p>
+              <p>The Four Zones evaluation reveals an asymmetric fit. TikTok excels in Publishing and Entertainment — zones aligned with the lower rungs of Godin's (1999) ladder, and WBD exploits these effectively. The Community zone supports broadcast conversation and spillover fan activity but cannot replicate the durable, group-shaped infrastructure that sustains WBD's <em>personal relationships</em> rung. The Commerce zone is underdeveloped on both sides — platform and brand — a gap WBD resolves by offloading conversion to its owned-media architecture (Section 4). TikTok is therefore best understood not as a ladder-extending platform but as an acquisition funnel, whose output must be transferred to owned channels where the upper rungs can actually be built.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         RAVENCLAW: WEBSITE CHECKLIST
+    ═══════════════════════════════════════ -->
+    <div id="panel-checklist" class="panel panel-raven">
+      <div class="content-col">
+        <div class="house-badge badge-raven"><span class="badge-dot"></span>Ravenclaw · FILE_04</div>
+        <p class="section-eyebrow">Section 4 · 196 words</p>
+        <h2 class="section-title raven">Website Checklist</h2>
+        <p class="section-subtitle">Evaluating HarryPotter.com's role in the ladder</p>
+        <div class="accent-bar bar-raven"></div>
+
+        <div class="prose">
+          <p><em>HarryPotter.com</em> serves as the Wizarding World franchise's primary owned-media destination. To evaluate its effectiveness in delivering the digital brand experience (see Section 2), this section applies the <em>Online Brand Equity</em> framework of Christodoulides et al. (2006) — supplemented by two of Nielsen's (2012) five usability components to capture platform-level accessibility (Chaffey and Ellis-Chadwick, 2022, pp.286–287; 302). The navigational inventory of the site is reproduced on the right as an interactive companion; Tables 2–3 define the evaluation criteria and scoring rubric; Table 4 applies them to HarryPotter.com.</p>
+        </div>
+
+        <p class="section-eyebrow" style="margin-top:1.4rem;">Table 2 · Evaluation Criteria</p>
+        <table class="checklist-table" style="margin-top:0.4rem;">
+          <thead>
+            <tr><th>#</th><th>Criterion</th><th>Definition</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Emotional Connection</td><td>Extent to which users feel personally understood by, related to, and cared for by the brand</td></tr>
+            <tr><td>2</td><td>Online Experience</td><td>Ease of navigation, clarity of search paths, and speed of information retrieval</td></tr>
+            <tr><td>3</td><td>Responsive Service</td><td>Brand's willingness to respond to customer needs and provide dialogic opportunities</td></tr>
+            <tr><td>4</td><td>Trust</td><td>User confidence in data security and transactional safety</td></tr>
+            <tr><td>5</td><td>Fulfilment</td><td>Delivery of promised products, services, or experiences in the promised timeframe</td></tr>
+            <tr><td>6</td><td>Learnability</td><td>Ease with which first-time users can accomplish basic tasks on the site</td></tr>
+            <tr><td>7</td><td>Satisfaction</td><td>Overall pleasantness of the user's experience with the design</td></tr>
+          </tbody>
+        </table>
+        <p class="figure-caption" style="margin-top:0.4rem;"><strong>Table 2.</strong> Website Evaluation Criteria (adapted from Christodoulides et al., 2006, and Nielsen, 2012, cited in Chaffey and Ellis-Chadwick, 2022, pp.286, 302).</p>
+
+        <p class="section-eyebrow" style="margin-top:1.4rem;">Table 3 · Scoring Rubric</p>
+        <table class="checklist-table" style="margin-top:0.4rem;font-size:0.65rem;">
+          <thead>
+            <tr><th>#</th><th>Criterion</th><th>1 — Absent</th><th>3 — Developed</th><th>5 — Best-in-class</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Emotional Connection</td><td>No personalisation or identity cues</td><td>Basic identity markers without dynamic content</td><td>Persistent identity with fully dynamic, identity-responsive content</td></tr>
+            <tr><td>2</td><td>Online Experience</td><td>Disorganised; no clear paths</td><td>Basic structure but inconsistent</td><td>Highly intuitive and well-structured</td></tr>
+            <tr><td>3</td><td>Responsive Service</td><td>No interaction channels</td><td>Limited feedback mechanism</td><td>Real-time dialogic engagement with brand response</td></tr>
+            <tr><td>4</td><td>Trust</td><td>No privacy, security, or credibility signals</td><td>Basic privacy policy and legal disclosures</td><td>Strong credibility, brand authority, visible data protection</td></tr>
+            <tr><td>5</td><td>Fulfilment</td><td>No product or service delivery</td><td>Standard delivery with basic tracking</td><td>Diverse, reliable fulfilment with flexible options</td></tr>
+            <tr><td>6</td><td>Learnability</td><td>First-time users cannot complete basic tasks</td><td>Basic onboarding with some guidance</td><td>Intuitive onboarding with visible progression and rewards</td></tr>
+            <tr><td>7</td><td>Satisfaction</td><td>Visually unpleasant or jarring</td><td>Cohesive design without distinctiveness</td><td>Immersive, brand-defining aesthetic experience</td></tr>
+          </tbody>
+        </table>
+        <p class="figure-caption" style="margin-top:0.4rem;"><strong>Table 3.</strong> Scoring Rubric for Website Evaluation Criteria (1–5 scale; intermediate levels 2 and 4 in full report).</p>
+
+        <p class="section-eyebrow" style="margin-top:1.4rem;">Table 4 · HarryPotter.com Evaluation</p>
+        <table class="checklist-table" style="margin-top:0.4rem;">
+          <thead>
+            <tr><th>#</th><th>Criterion</th><th>Score</th><th>Evidence &amp; Comment</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Emotional Connection</td><td class="check-pass">5</td><td>Hogwarts Sorting; Patronus Experience; Portrait Maker; Profile hub. Persistent identity markers drive dynamic house-themed content delivery — operationalising Godin's (1999) <em>intravenous permission</em> rung.</td></tr>
+            <tr><td>2</td><td>Online Experience</td><td class="check-pass">4</td><td>Nine-category navigation is logically clustered and consistent, though depth within Discover (five subsections) occasionally obscures pathways.</td></tr>
+            <tr><td>3</td><td>Responsive Service</td><td class="check-fail">2</td><td>WBD broadcasts outward through social channels but provides no dialogic return path on the site itself — a structural gap in two-way engagement.</td></tr>
+            <tr><td>4</td><td>Trust</td><td class="check-pass">4</td><td>Transparent legal scaffolding and visible WBD parentage lend institutional credibility; no third-party trust marks (e.g. Trustpilot) displayed.</td></tr>
+            <tr><td>5</td><td>Fulfilment</td><td class="check-pass">4</td><td>Clear pricing, sale markers, sold-out states; fulfilment delegated to the external Harry Potter Shop domain rather than integrated on-site.</td></tr>
+            <tr><td>6</td><td>Learnability</td><td class="check-pass">5</td><td>"Your Wizarding Checklist" gamified progression tracker guides first-time users through identity-building — textbook best practice.</td></tr>
+            <tr><td>7</td><td>Satisfaction</td><td class="check-pass">5</td><td>House-conditional theming, Wizarding World typography, ambient starfield backgrounds, Portrait Maker unlockables — immersive brand aesthetic.</td></tr>
+            <tr><td colspan="2"><strong>Mean Score</strong></td><td colspan="2"><strong>4.1 / 5.0</strong></td></tr>
+          </tbody>
+        </table>
+        <p class="figure-caption" style="margin-top:0.4rem;"><strong>Table 4.</strong> Evaluation of HarryPotter.com.</p>
+
+        <div class="prose" style="margin-top:1.4rem;">
+          <p><em>HarryPotter.com</em> scores strongly on brand-experience dimensions (<em>Emotional Connection</em>, <em>Learnability</em>, <em>Satisfaction</em>), reflecting WBD's architectural mastery of identity-based engagement. The Profile hub's persistent identity system (Image 3) operationalises the upper ladder rungs of Section 2 — a direct answer to the Honeycomb weakness identified in Section 3. <em>Responsive Service</em> scores lowest: the site pushes users outward to social platforms rather than hosting dialogue internally, meaning upper-rung permission is architectural rather than conversational. The site functions less as a communication channel than as a brand-identity operating system — which, for this franchise, is exactly what it needs to be.</p>
+        </div>
+      </div>
+
+      <!-- VISUAL: Fake harrypotter.com navigator -->
+      <div class="visual-col">
+        <p class="visual-col-label">Structural mimic · harrypotter.com IA</p>
+
+        <div class="fake-nav-browser">
+          <div class="fake-nav-topbar">
+            <span class="fake-nav-dots"><span></span><span></span><span></span></span>
+            <span class="fake-nav-url">harrypotter.com</span>
+          </div>
+
+          <div class="fake-profile">
+            <div class="fake-profile-avatar">L</div>
+            <div class="fake-profile-text">
+              <div class="fake-profile-name">Luna Lovegood</div>
+              <div class="fake-profile-house">Ravenclaw · House Member</div>
+            </div>
+            <div class="fake-points">
+              <strong>1,240</strong>
+              House points
+            </div>
+          </div>
+
+          <ul class="fake-nav-list" id="fake-nav">
+            <li class="fake-nav-item">
+              <button class="fake-nav-trigger">News &amp; Features<span class="fake-nav-chevron">›</span></button>
+              <div class="fake-nav-desc"><div class="fake-nav-desc-inner">Editorial updates and long-form articles for sustained fan engagement.</div></div>
+              <ul class="fake-nav-sub">
+                <li>News</li>
+                <li>Features</li>
+              </ul>
+            </li>
+            <li class="fake-nav-item">
+              <button class="fake-nav-trigger">Quizzes &amp; Puzzles<span class="fake-nav-chevron">›</span></button>
+              <div class="fake-nav-desc"><div class="fake-nav-desc-inner">Interactive sorting and challenge content for participatory engagement.</div></div>
+              <ul class="fake-nav-sub">
+                <li>Quizzes</li>
+                <li>Puzzles</li>
+              </ul>
+            </li>
+            <li class="fake-nav-item">
+              <button class="fake-nav-trigger">J.K. Rowling Archive<span class="fake-nav-chevron">›</span></button>
+              <div class="fake-nav-desc"><div class="fake-nav-desc-inner">Author's original supplementary content for narrative authenticity.</div></div>
+            </li>
+            <li class="fake-nav-item">
+              <button class="fake-nav-trigger">Discover<span class="fake-nav-chevron">›</span></button>
+              <div class="fake-nav-desc"><div class="fake-nav-desc-inner">Cross-franchise hub linking literary, cinematic, gaming, theatrical, and theme park properties.</div></div>
+              <ul class="fake-nav-sub">
+                <li>Books</li>
+                <li>Films</li>
+                <li>Portkey Games</li>
+                <li>On Stage</li>
+                <li>Experiences</li>
+              </ul>
+            </li>
+            <li class="fake-nav-item">
+              <button class="fake-nav-trigger">Hogwarts Sorting<span class="fake-nav-chevron">›</span></button>
+              <div class="fake-nav-desc"><div class="fake-nav-desc-inner">Algorithmic house-assignment quiz generating persistent identity marker.</div></div>
+            </li>
+            <li class="fake-nav-item">
+              <button class="fake-nav-trigger">Portrait Maker<span class="fake-nav-chevron">›</span></button>
+              <div class="fake-nav-desc"><div class="fake-nav-desc-inner">Custom avatar creation tool with unlockable cosmetic rewards.</div></div>
+            </li>
+            <li class="fake-nav-item">
+              <button class="fake-nav-trigger">Patronus Experience<span class="fake-nav-chevron">›</span></button>
+              <div class="fake-nav-desc"><div class="fake-nav-desc-inner">Personality-linked magical creature assignment.</div></div>
+            </li>
+            <li class="fake-nav-item">
+              <button class="fake-nav-trigger">Fact Files<span class="fake-nav-chevron">›</span></button>
+              <div class="fake-nav-desc"><div class="fake-nav-desc-inner">Quick-reference lore database for canon verification.</div></div>
+            </li>
+            <li class="fake-nav-item">
+              <button class="fake-nav-trigger">Shop<span class="fake-nav-chevron">›</span></button>
+              <div class="fake-nav-desc"><div class="fake-nav-desc-inner">Direct merchandise e-commerce platform.</div></div>
+            </li>
+            <li class="fake-nav-item">
+              <button class="fake-nav-trigger">Profile<span class="fake-nav-chevron">›</span></button>
+              <div class="fake-nav-desc"><div class="fake-nav-desc-inner">Persistent user hub; Conditional house-themed content delivery.</div></div>
+            </li>
+          </ul>
+
+          <div class="fake-nav-note">Illustrative reproduction · links disabled</div>
+        </div>
+
+        <p class="fake-nav-caption">Structural mimic of harrypotter.com's information architecture — the object evaluated on the left is reproduced as a reading companion on the right.</p>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         SLYTHERIN: TREND ANALYSIS
+    ═══════════════════════════════════════ -->
+    <div id="panel-trend" class="panel panel-slyth">
+      <div class="content-col">
+        <div class="house-badge badge-slyth"><span class="badge-dot"></span>Slytherin · FILE_05</div>
+        <p class="section-eyebrow">Section 5 · 410 words</p>
+        <h2 class="section-title slyth">Trend Analysis</h2>
+        <p class="section-subtitle">Brand Fusion &amp; Talent-Participation UGC</p>
+        <div class="accent-bar bar-slyth"></div>
+
+        <div class="prose">
+          <p>TikTok's trend forecast identifies <em>Brand Fusion</em> as a strategic shift in which brands accumulate equity by participating within communities rather than broadcasting at them (TikTok, 2025; 2026), extending longer-standing academic work on brand–community co-creation (Chaffey and Ellis-Chadwick, 2022, p.245). Within this category, <em>Talent-Participation User-Generated Content</em> (UGC) has recently emerged: fan-initiated remix chains in which the original brand talent joins as co-participant rather than endorser (Chaffey and Ellis-Chadwick, 2022, p.424; Chaffey and Smith, 2022, pp.343–344).</p>
+
+          <p>The <em>Pass the Phone</em> challenge — in which creators film themselves stating "I'm passing the phone to someone who […]" before the video cuts to a new creator completing the premise — became a widely replicated remix format (Image 10).</p>
+        </div>
+
+        <div class="figure-inline" style="margin-top:1rem;">
+          <div class="img-slot" style="aspect-ratio:16/10;">
+            <div class="img-slot-icon">📈</div>
+            <span class="img-slot-label">Image 10 · #passthephonechallenge<br>[add image]</span>
+          </div>
+          <p class="figure-caption"><strong>Image 10.</strong> As of April 20, 2026, the <em>#passthephonechallenge</em> alone has generated 55,300 unique posts, facilitating rapid circulation across diverse niches — from educational institutions (British International School, VinUniversity) to global personalities (Mr.Beast, Stray Kids) (compiled by Author, 2026).</p>
+        </div>
+
+        <div class="prose" style="margin-top:1.3rem;">
+          <p>Its Wizarding World application is instructive. The chain originated from @miwallbank's "I look like Draco Malfoy" video (3.1M likes), which Tom Felton himself later joined — @miwallbank reenacting one of Draco's canonical lines (Wallbank, 2022a; 2022b; 2022c). Subsequent pass-the-phone chains built on this recognition, moving from a fan, to @miwallbank, to Felton, to a McGonagall cosplayer — each participant invoking a deeper layer of franchise authority (Williams, 2022; Image 11). WBD commissioned no node in the chain.</p>
+
+          <p>This crystallises the portfolio's analytical arc. Section 2 argued that the Wizarding World's Ladder is sustained by <em>personal relationships</em> outside direct brand control (Godin, 1999, chapter 6); Section 3 found TikTok structurally attenuates the <em>Groups</em> and <em>Relationships</em> blocks (Kietzmann et al., 2011, p.243). Talent-Participation UGC resolves the contradiction: it does not require TikTok to host durable group architecture because the shared cultural object — <em>Draco Malfoy as persona</em> — is hosted in three decades of franchise permission. TikTok surfaces the remix chains; WBD's owned-channel infrastructure supplies the material being remixed.</p>
+
+          <p>More broadly, the trend suggests a strategic reorientation for brands operating on TikTok in 2026. The conventional "four levers" model — native creative, paid amplification, creator partnerships, hashtag challenges (Chaffey and Ellis-Chadwick, 2022, pp.447–449; Chaffey and Smith, 2022, pp.330–331) — assumes brand-initiated activation. <em>Brand Fusion</em> inverts this: for IP-rich brands, the correct posture is permission-based patience combined with selective amplification of organic remix chains, rather than campaign-driven activation. The implication is bifurcated: brands with deep cultural permission (Disney, Marvel, Wizarding World) can exploit Brand Fusion with minimal investment, whilst brands without that depth must first build it through owned-channel identity work before TikTok's algorithmic amplification can operate on their behalf. For WBD, the marketing task is no longer generating participation but protecting the conditions that sustain it — the same conclusion Section 2 reached via a different route.</p>
+        </div>
+      </div>
+
+      <!-- VISUAL: Trend timeline + videos -->
+      <div class="visual-col">
+        <p class="visual-col-label">Chronological evidence</p>
+
+        <p class="trend-intro">Passing-the-phone chain</p>
+        <h3 class="trend-year">2022</h3>
+
+        <div class="trend-timeline" id="trend-timeline">
+
+          <div class="timeline-node" data-node="n1">
+            <button class="timeline-date-btn" data-scroll-to="n1">Feb 9 · Origin</button>
+            <div class="timeline-video-card" id="video-n1">
+              <video controls preload="metadata" poster="img/poster-wallbank1.jpg">
+                <source src="videos/wallbank-2022a.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="timeline-video-placeholder" style="display:none;">
+                <span style="font-size:1.3rem;opacity:0.25;">▶</span>
+                <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);">[add videos/wallbank-2022a.mp4]</span>
+              </div>
+              <p class="timeline-citation">
+                Wallbank, E. (2022a) <em>🥚 #fyp #foryoupage #harrypotter #dracomalfoy #blonde #fml #askontiktok #viral #car #comedy #funny #truestory #hair #uk #british #storytime #yorkshire</em> [TikTok] 9 February. Available at: <a href="https://vm.tiktok.com/ZTkuW3TY2/" target="_blank" rel="noopener">https://vm.tiktok.com/ZTkuW3TY2/</a> (Accessed: 20 April 2026).
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-node" data-node="n2">
+            <button class="timeline-date-btn" data-scroll-to="n2">Oct 16 · Crossover</button>
+            <div class="timeline-video-card" id="video-n2">
+              <video controls preload="metadata" poster="img/poster-wallbank2.jpg">
+                <source src="videos/wallbank-2022b.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="timeline-video-placeholder" style="display:none;">
+                <span style="font-size:1.3rem;opacity:0.25;">▶</span>
+                <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);">[add videos/wallbank-2022b.mp4]</span>
+              </div>
+              <p class="timeline-citation">
+                Wallbank, E. (2022b) <em>multiverse of madness 2: malfoy mayhem, meet my new friend @Tom Felton who just so happens to look a little&hellip;</em> [TikTok] 16 October. Available at: <a href="https://vm.tiktok.com/ZTkHL8E7X/" target="_blank" rel="noopener">https://vm.tiktok.com/ZTkHL8E7X/</a> (Accessed: 20 April 2026).
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-node" data-node="n3">
+            <button class="timeline-date-btn" data-scroll-to="n3">Oct 17 · Chain</button>
+            <div class="timeline-video-card" id="video-n3">
+              <video controls preload="metadata" poster="img/poster-williams.jpg">
+                <source src="videos/williams-2022.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <div class="timeline-video-placeholder" style="display:none;">
+                <span style="font-size:1.3rem;opacity:0.25;">▶</span>
+                <span style="font-family:'Courier Prime',monospace;font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);">[add videos/williams-2022.mp4]</span>
+              </div>
+              <p class="timeline-citation">
+                Williams, C. (2022) <em>When you accidentally out blonde the Malfoy's 😂 what a surreal experience in a backstage corridor&hellip;</em> [TikTok] 17 October. Available at: <a href="https://vm.tiktok.com/ZTku7QNjf/" target="_blank" rel="noopener">https://vm.tiktok.com/ZTku7QNjf/</a> (Accessed: 20 April 2026).
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         REFERENCES
+    ═══════════════════════════════════════ -->
+    <div id="panel-refs" class="panel">
+      <div class="content-col" style="grid-column: 1 / -1; border-right: none;">
+        <p class="section-eyebrow">FILE_06 · Conclusion &amp; References</p>
+        <h2 class="section-title">Conclusion &amp; Reference List</h2>
+        <p class="section-subtitle">Section 6 · 82 words · Harvard referencing throughout</p>
+        <div class="accent-bar bar-ink"></div>
+
+        <div class="prose">
+          <p>Across four analyses, a single pattern emerges: the Wizarding World's digital strength lies less in any single platform or campaign than in the compound infrastructure of permission accumulated over three decades. TikTok cannot extend WBD's engagement ladder because it structurally attenuates the communities that sustain the upper rungs; <em>HarryPotter.com</em> can, because its architecture operationalises identity as loyalty currency; and <em>Brand Fusion</em> surfaces organically because the cultural material exists to be remixed. <strong>For IP-rich brands, the marketing task is protection, not activation.</strong></p>
+        </div>
+
+        <h3 class="section-title" style="font-size:1.1rem;margin-top:2rem;">References</h3>
+        <div class="accent-bar bar-ink" style="margin-top:0.4rem;"></div>
+
+        <ul class="ref-list">
+          <li>Amrar, S. (2024) <em>Harry Potter and the IP empire.</em> Available at: https://www.citma.org.uk/resources/harry-potter-and-the-ip-empire-blog.html (Accessed: 18 April 2026).</li>
+          <li>Box Office Mojo (no date-a) <em>Harry Potter and the chamber of secrets.</em> Available at: https://www.boxofficemojo.com/title/tt0295297/ (Accessed: 18 April 2026).</li>
+          <li>Box Office Mojo (no date-b) <em>Harry Potter and the deathly hallows: part 1.</em> Available at: https://www.boxofficemojo.com/title/tt0926084/ (Accessed: 18 April 2026).</li>
+          <li>Box Office Mojo (no date-c) <em>Harry Potter and the deathly hallows: part 2.</em> Available at: https://www.boxofficemojo.com/title/tt1201607/ (Accessed: 18 April 2026).</li>
+          <li>Box Office Mojo (no date-d) <em>Harry Potter and the goblet of fire.</em> Available at: https://www.boxofficemojo.com/title/tt0330373/ (Accessed: 18 April 2026).</li>
+          <li>Box Office Mojo (no date-e) <em>Harry Potter and the half-blood prince.</em> Available at: https://www.boxofficemojo.com/title/tt0417741/ (Accessed: 18 April 2026).</li>
+          <li>Box Office Mojo (no date-f) <em>Harry Potter and the order of the phoenix.</em> Available at: https://www.boxofficemojo.com/title/tt0373889/ (Accessed: 18 April 2026).</li>
+          <li>Box Office Mojo (no date-g) <em>Harry Potter and the prisoner of Azkaban.</em> Available at: https://www.boxofficemojo.com/title/tt0304141/ (Accessed: 18 April 2026).</li>
+          <li>Box Office Mojo (no date-h) <em>Harry Potter and the sorcerer's stone.</em> Available at: https://www.boxofficemojo.com/title/tt0241527/ (Accessed: 18 April 2026).</li>
+          <li>Brown, S. (2002) 'Marketing for Muggles: The Harry Potter way to higher profits', <em>Business Horizons,</em> 45(1), pp.6–14. doi: 10.1016/s0007-6813(02)80004-0.</li>
+          <li>Brown, S. and Patterson, A. (2010) 'Selling stories: Harry Potter and the marketing plot', <em>Psychology and Marketing,</em> 27(6), pp.541–556. doi: 10.1002/mar.20343.</li>
+          <li>Bursztynsky, J. (2021) <em>TikTok says 1 billion people use the app each month.</em> Available at: https://www.cnbc.com/2021/09/27/tiktok-reaches-1-billion-monthly-users.html (Accessed: 22 April 2026).</li>
+          <li>Chaffey, D. and Ellis-Chadwick, F. (2022) <em>Digital marketing.</em> Available at: https://ebookcentral.proquest.com/lib/northampton/detail.action?docID=6977555 (Accessed: 18 April 2026).</li>
+          <li>Chaffey, D. and Smith, P.R. (2022) <em>Digital marketing excellence: planning, optimizing and integrating online marketing.</em> Available at: https://ebookcentral.proquest.com/lib/northampton/detail.action?docID=7013342 (Accessed: 18 April 2026).</li>
+          <li>Chen, L. (2026) <em>TikTok algorithm 2026: how it works for brands and what to do about it.</em> Available at: https://greenfroglabs.com/blog/tiktok-algorithm-2026-brand-strategy (Accessed: 18 April 2026).</li>
+          <li>[Entrance to the Métro-Floo at The Wizarding World of Harry Potter, Ministry of Magic] (2019) [Photograph]. Available at: https://blog.discoveruniversal.com/guides-and-tips/ultimate-guide-wizarding-world-harry-potter-universal-orlando-resort/ (Accessed: 18 April 2026).</li>
+          <li>[Family toasting with Butterbeer in a Wizarding World restaurant] (2019) [Photograph]. Available at: https://blog.discoveruniversal.com/guides-and-tips/ultimate-guide-wizarding-world-harry-potter-universal-orlando-resort/ (Accessed: 18 April 2026).</li>
+          <li>Godin, S. (1999) <em>Permission marketing: turning strangers into friends and friends into customers.</em> Available at: http://ci.nii.ac.jp/ncid/BA42544381 (Accessed: 18 April 2026).</li>
+          <li>Hashem, T.N., Asad, S., Rifai, F. and Qtaish, R.M. (2024) 'The Wizarding World of Harry Potter: how to employ literary works as a source for branding and marketing?', <em>Pakistan Journal of Life and Social Sciences (PJLSS),</em> 22(2), pp.20027–20042. doi: 10.57239/pjlss-2024-22.2.001465.</li>
+          <li>Kietzmann, J., Hermkens, K., McCarthy, I. and Silvestre, B. (2011) 'Social media? Get serious! Understanding the functional building blocks of social media', <em>Business Horizons,</em> 54(3), pp.241–251. doi: 10.1016/j.bushor.2011.01.005.</li>
+          <li>Lang, K. (2025) <em>TikTok algorithm guide 2026: everything we know about how videos are ranked.</em> Available at: https://buffer.com/resources/tiktok-algorithm/ (Accessed: 18 April 2026).</li>
+          <li>Sheppard, Z. (2007) <em>Waiting for Harry Potter at Borders</em> [Photograph]. Available at: https://www.flickr.com/photos/quikbeam/863762368/ (Accessed: 18 April 2026).</li>
+          <li>The Harry Potter Editorial Team (2025) <em>Try our new TikTok creator challenge for back to Hogwarts season.</em> Available at: https://www.harrypotter.com/news/try-back-to-hogwarts-tiktok-creator-challenge (Accessed: 18 April 2026).</li>
+          <li>TikTok (2025) <em>TikTok what's next 2025 trend report.</em> Available at: https://newsroom.tiktok.com/tiktok-whats-next-2025-trend-report-us (Accessed: 18 April 2026).</li>
+          <li>TikTok (2026) <em>Introducing TikTok next 2026: our trend forecast for marketers for the year ahead.</em> Available at: https://newsroom.tiktok.com/introducing-tiktok-next-2026-our-trend-forecast-for-marketers-for-the-year-ahead (Accessed: 18 April 2026).</li>
+          <li>TikTok Support (no date) <em>Stitch.</em> Available at: https://www.tiktok.com/support/faq_detail?id=7612493022214822420 (Accessed: 18 April 2026).</li>
+          <li>Tuten, T.L. and Solomon, M.R. (2018) <em>Social media marketing.</em> 3rd edn. Available at: https://pdfcoffee.com/dtc-338-social-media-marketing-tracy-l-tuten-pdf-free.html (Accessed: 22 April 2026).</li>
+          <li>Wallbank, E. (2022a) <em>🥚 #fyp #foryoupage #harrypotter #dracomalfoy #blonde #fml #askontiktok #viral #car #comedy #funny #truestory #hair #uk #british #storytime #yorkshire</em> [TikTok] 9 February. Available at: https://vm.tiktok.com/ZTkuW3TY2/ (Accessed: 20 April 2026).</li>
+          <li>Wallbank, E. (2022b) <em>multiverse of madness 2: malfoy mayhem, meet my new friend @Tom Felton who just so happens to look a little...</em> [TikTok] 16 October. Available at: https://vm.tiktok.com/ZTkHL8E7X/ (Accessed: 20 April 2026).</li>
+          <li>Wallbank, E. (2022c) <em>tiktok really did that huh, now i'm officially a slytherin 🐍</em> [TikTok] 18 October. Available at: https://vm.tiktok.com/ZTku7mDxK/ (Accessed: 20 April 2026).</li>
+          <li>Warner Bros Merchandise (no date) <em>Official Harry Potter Shop UK.</em> Available at: https://harrypottershop.co.uk/ (Accessed: 18 April 2026).</li>
+          <li>Williams, C. (2022) <em>When you accidentally out blonde the Malfoy's 😂 what a surreal experience in a backstage corridor...</em> [TikTok] 17 October. Available at: https://vm.tiktok.com/ZTku7QNjf/ (Accessed: 20 April 2026).</li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- /folder-body -->
+</div><!-- /folder-stack -->
+
+<p class="folder-footer">Anh Truong · 25832146 · MKT3039 AS2 · University of Northampton × Foreign Trade University</p>
+
+<script>
+  const keys = ['intro','gryff','tiktok','checklist','trend','refs'];
+  const tabs = document.querySelectorAll('.tab');
+
+  function openTab(key, btn) {
+    document.getElementById('panel-welcome').classList.remove('active');
+    keys.forEach(id => {
+      const el = document.getElementById('panel-' + id);
+      if (el) el.classList.remove('active');
+    });
+    tabs.forEach(t => t.classList.remove('active'));
+    const target = document.getElementById('panel-' + key);
+    if (target) target.classList.add('active');
+    if (btn) btn.classList.add('active');
+  }
+
+  function openTabByIndex(idx) {
+    openTab(keys[idx], tabs[idx]);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ── LADDER: click to centre ── */
+  (function initLadder() {
+    const circle = document.getElementById('ladder-circle');
+    const caption = document.getElementById('ladder-caption');
+    if (!circle || !caption) return;
+    const imgs = circle.querySelectorAll('.ladder-img');
+    imgs.forEach(img => {
+      img.addEventListener('click', () => {
+        const isActive = img.classList.contains('active');
+        imgs.forEach(i => i.classList.remove('active', 'dimmed'));
+        if (!isActive) {
+          img.classList.add('active');
+          imgs.forEach(i => { if (i !== img) i.classList.add('dimmed'); });
+          caption.innerHTML = img.dataset.caption || '';
+        } else {
+          caption.innerHTML = '<span class="ladder-caption-hint">Click any rung to enlarge &amp; read caption</span>';
+        }
+      });
+    });
+  })();
+
+  /* ── TIKTOK CAROUSELS ── */
+  (function initCarousels() {
+    document.querySelectorAll('.carousel').forEach(car => {
+      const slides = car.querySelectorAll('.carousel-slide');
+      const counter = car.querySelector('.carousel-counter');
+      const nextBtn = car.querySelector('.carousel-next');
+      const key = car.getAttribute('data-carousel');
+      const captionEl = key ? document.querySelector('.zone-card-caption[data-caption-for="' + key + '"]') : null;
+      let idx = 0;
+      const hasPerSlideCaptions = captionEl && Array.from(slides).some(s => s.dataset.caption);
+      if (!nextBtn) return;
+      nextBtn.addEventListener('click', () => {
+        slides[idx].classList.remove('active');
+        idx = (idx + 1) % slides.length;
+        slides[idx].classList.add('active');
+        if (counter) counter.textContent = (idx + 1) + ' / ' + slides.length;
+        if (hasPerSlideCaptions && slides[idx].dataset.caption) {
+          captionEl.innerHTML = slides[idx].dataset.caption;
+        }
+      });
+    });
+  })();
+
+  /* ── FAKE NAV ACCORDION (multi-open, per-item toggle) ── */
+  (function initFakeNav() {
+    const nav = document.getElementById('fake-nav');
+    if (!nav) return;
+    nav.querySelectorAll('.fake-nav-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const item = trigger.closest('.fake-nav-item');
+        if (!item) return;
+        const desc = item.querySelector('.fake-nav-desc');
+        const sub = item.querySelector('.fake-nav-sub');
+        const isOpen = trigger.classList.contains('open');
+        if (isOpen) {
+          trigger.classList.remove('open');
+          if (desc) desc.classList.remove('open');
+          if (sub) sub.classList.remove('open');
+        } else {
+          trigger.classList.add('open');
+          if (desc) desc.classList.add('open');
+          if (sub) sub.classList.add('open');
+        }
+      });
+    });
+  })();
+
+  /* ── TREND TIMELINE: scroll to node ── */
+  (function initTimeline() {
+    const timeline = document.getElementById('trend-timeline');
+    if (!timeline) return;
+    timeline.querySelectorAll('[data-scroll-to]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.scrollTo;
+        const card = document.getElementById('video-' + key);
+        const node = timeline.querySelector('[data-node="' + key + '"]');
+        if (card) {
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          timeline.querySelectorAll('.timeline-video-card').forEach(c => c.classList.remove('highlight'));
+          timeline.querySelectorAll('.timeline-node').forEach(n => n.classList.remove('highlight'));
+          card.classList.add('highlight');
+          if (node) node.classList.add('highlight');
+          setTimeout(() => {
+            card.classList.remove('highlight');
+            if (node) node.classList.remove('highlight');
+          }, 2200);
+        }
+      });
+    });
+    document.querySelectorAll('.timeline-video-card video').forEach(v => {
+      v.addEventListener('error', () => {
+        const ph = v.parentElement.querySelector('.timeline-video-placeholder');
+        if (ph) { v.style.display = 'none'; ph.style.display = 'flex'; }
+      });
+    });
+  })();
+</script>
+</body>
+</html>
