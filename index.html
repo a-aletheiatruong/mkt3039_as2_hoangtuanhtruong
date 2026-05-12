@@ -160,6 +160,7 @@
   }
 
   .panel.active { display: grid; grid-template-columns: 1fr 320px; }
+#panel-intro.active { grid-template-columns: 1fr; }
   .panel-gryff.active { grid-template-columns: 1fr 1fr; }
   .panel-raven.active, .panel-slyth.active { grid-template-columns: 3fr 2fr; }
   .panel-gryff .content-col { overflow: visible; }
@@ -1128,16 +1129,6 @@
             <button class="nav-pill pill-slyth" onclick="openTabByIndex(4)">Trend Analysis</button>
           </div>
         </div>
-      </div>
-
-      <!-- VISUAL: intro -->
-      <div class="visual-col">
-        <p class="visual-col-label">Portfolio overview</p>
-        <div class="img-slot" style="aspect-ratio:9/16; max-width:340px; max-height:620px; margin:0 auto;">
-          <div class="img-slot-icon">🏰</div>
-          <span class="img-slot-label">Cover image or brand visual<br>[add your image here]</span>
-        </div>
-        <p class="img-caption">[Optional caption for cover image]</p>
       </div>
     </div>
 
